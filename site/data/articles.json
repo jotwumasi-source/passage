@@ -1,0 +1,228 @@
+[
+  {
+    "id": "a1",
+    "t": "How to study abroad: a step-by-step guide",
+    "tag": "Getting started",
+    "min": 6,
+    "sum": [
+      "Start 12 months before your intake.",
+      "Choose 6 to 8 programmes across reach, target and safe.",
+      "Fund first: scholarship deadlines can come before admission deadlines."
+    ],
+    "sec": [
+      [
+        "1. Decide your field and level",
+        "Pick the Masters or PhD that leads to your career goal. Write one sentence about what you want to do afterwards. Every other choice follows from it."
+      ],
+      [
+        "2. Choose countries",
+        "Compare tuition, living costs, work rights and funding for each. Use the country guides."
+      ],
+      [
+        "3. Check requirements",
+        "Note the degree class, English test, references and documents each programme needs."
+      ],
+      [
+        "4. Plan funding early",
+        "Chevening and Commonwealth close in October, Eiffel in early January, Fulbright varies by country. List every deadline in your plan."
+      ],
+      [
+        "5. Apply, then prepare for the visa",
+        "Submit early, compare offers, and begin visa documents as soon as you accept."
+      ]
+    ],
+    "next": [
+      [
+        "Build your fit profile",
+        "profile"
+      ],
+      [
+        "Browse programmes",
+        "find"
+      ]
+    ]
+  },
+  {
+    "id": "a2",
+    "t": "Fully funded scholarships for international students",
+    "tag": "Funding",
+    "min": 7,
+    "sum": [
+      "Most full awards need two years of work experience or a leadership record.",
+      "Assistantships are the main funded route in the US and Canada.",
+      "Combine one full award with two or three backups."
+    ],
+    "sec": [
+      [
+        "Government awards",
+        "Chevening, Commonwealth, DAAD, the Swedish Institute, MEXT, GKS and Australia Awards are among the best-known. Each has its own nationality rules and deadlines. Check the official site."
+      ],
+      [
+        "Fellowships",
+        "Knight-Hennessy, Schwarzman, Gates Cambridge and Rhodes fund a small group of leaders. They are tied to a specific university or programme."
+      ],
+      [
+        "Assistantships",
+        "For research degrees, departments fund strong applicants with tuition waivers and stipends. Contact supervisors early."
+      ],
+      [
+        "Build a funding stack",
+        "No single award is certain. Plan for several, and know what you could pay yourself if none comes through."
+      ]
+    ],
+    "next": [
+      [
+        "Find scholarships",
+        "scholarships"
+      ],
+      [
+        "Get essay help",
+        "help"
+      ]
+    ]
+  },
+  {
+    "id": "a3",
+    "t": "How to write a statement of purpose",
+    "tag": "Applying",
+    "min": 8,
+    "sum": [
+      "Open with a specific moment, not a general claim.",
+      "Show evidence: projects, numbers and your exact role.",
+      "Name modules, labs or professors for each school."
+    ],
+    "sec": [
+      [
+        "Start with a story",
+        "Begin with one real problem you worked on. Avoid openings like \"since childhood\" or \"I have always been passionate\"."
+      ],
+      [
+        "Show evidence",
+        "Give results, numbers and what you personally did. Admissions readers trust specifics."
+      ],
+      [
+        "Explain the fit",
+        "Say why this programme and this university. Mention modules, labs or professors."
+      ],
+      [
+        "Finish with a plan",
+        "Say what you will do after the degree and who it will help. Funders look for this too."
+      ]
+    ],
+    "next": [
+      [
+        "Run the free SOP check",
+        "sop"
+      ],
+      [
+        "Book an expert review",
+        "help"
+      ]
+    ]
+  },
+  {
+    "id": "a4",
+    "t": "Choosing a country: cost, funding and staying on",
+    "tag": "Countries",
+    "min": 6,
+    "sum": [
+      "The UK is short and well funded at the top, but tuition is high.",
+      "Germany, Switzerland, Japan and Korea have low tuition.",
+      "Canada and the US fund research students more than course-based ones."
+    ],
+    "sec": [
+      [
+        "If you want the fastest degree",
+        "The UK offers one-year Masters. Total cost can be lower than a two-year degree even with high tuition."
+      ],
+      [
+        "If tuition is your biggest worry",
+        "Germany, Switzerland, Japan and South Korea have low tuition. Budget for living costs and the visa funds requirement."
+      ],
+      [
+        "If you want to work afterwards",
+        "Check the post-study work rules in each country guide. They change often."
+      ]
+    ],
+    "next": [
+      [
+        "See country guides",
+        "countries"
+      ],
+      [
+        "Compare programmes",
+        "find"
+      ]
+    ]
+  },
+  {
+    "id": "a5",
+    "t": "English tests: what score do you need?",
+    "tag": "Tests",
+    "min": 4,
+    "sum": [
+      "Most Masters programmes ask for about 6.5 IELTS overall.",
+      "Some set minimums in each part.",
+      "Book early: test dates fill up before deadlines."
+    ],
+    "sec": [
+      [
+        "Typical requirements",
+        "Sydney, for example, asks for IELTS 6.5 overall with 6.0 in each band, or TOEFL iBT 85, or PTE 64. Competitive programmes ask for 7.0. Check each programme page."
+      ],
+      [
+        "If you are close",
+        "Retake with focused practice on your weakest skill."
+      ],
+      [
+        "Other tests",
+        "Many universities also accept TOEFL, PTE or Duolingo. Check which your programme accepts."
+      ]
+    ],
+    "next": [
+      [
+        "Practise speaking with an expert",
+        "help"
+      ],
+      [
+        "Update your profile",
+        "profile"
+      ]
+    ]
+  },
+  {
+    "id": "a6",
+    "t": "Proof of funds and visa basics",
+    "tag": "Visa",
+    "min": 5,
+    "sum": [
+      "Most visas ask you to show you can pay tuition and living costs.",
+      "UK: £1,529 a month in London or £1,171 elsewhere, held for 28 days.",
+      "Start collecting documents the day you accept an offer."
+    ],
+    "sec": [
+      [
+        "What proof of funds means",
+        "Immigration offices want evidence that you can pay for study and living. Rules differ by country."
+      ],
+      [
+        "Scholarships and proof of funds",
+        "Some scholarship letters count, some do not. Check the funder and the visa rules."
+      ],
+      [
+        "Plan the documents",
+        "Collect bank statements, sponsor letters and the offer letter early. Banks can take weeks."
+      ]
+    ],
+    "next": [
+      [
+        "Get visa interview prep",
+        "help"
+      ],
+      [
+        "Open your plan",
+        "plan"
+      ]
+    ]
+  }
+]

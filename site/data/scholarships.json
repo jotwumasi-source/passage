@@ -1,0 +1,436 @@
+[
+  {
+    "id": "chev",
+    "n": "Chevening Scholarship",
+    "c": "UK",
+    "t": "Government",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 2,
+    "nat": "notUK",
+    "v": "ver",
+    "src": "chevening.org",
+    "closed": true,
+    "el": "Citizen of an eligible country. At least 2,800 hours (about two years) of work experience. One-year Masters at an eligible UK university.",
+    "dl": "Applications opened August 2026 and closed October 2026 for the 2027/28 year. Interviews March to April 2027. Results from mid-June 2027.",
+    "note": "Tuition, economy travel, visa cost, arrival and departure allowances, and a monthly living allowance.",
+    "tip": "Write about leadership and networking, not only grades.",
+    "url": "https://www.chevening.org/scholarships/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "comm",
+    "n": "Commonwealth Master's Scholarship",
+    "c": "UK",
+    "t": "Government",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "cw",
+    "v": "ver",
+    "src": "cscuk.fcdo.gov.uk",
+    "closed": true,
+    "el": "Citizen of, or refugee in, one of about 40 eligible low- or middle-income Commonwealth countries. Upper second class degree, or lower second plus a postgraduate qualification. Apply through a nominating agency.",
+    "dl": "The 2027/28 round closed on 20 October 2026. Outcomes by July 2027.",
+    "note": "Full fees, approved airfare, a stipend of £1,712 a month (£2,000 in London) and a study travel grant.",
+    "tip": "Explain how your studies will have development impact.",
+    "url": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "eiff",
+    "n": "Eiffel Excellence Scholarship",
+    "c": "FR",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Partial",
+    "minExp": 0,
+    "nat": "open",
+    "maxAge": {
+      "masters": 29,
+      "phd": 35
+    },
+    "v": "ver",
+    "src": "campusfrance.org",
+    "el": "Masters students up to age 29 and PhD students up to age 35. Only French higher education institutions can apply for you.",
+    "dl": "The 2027 call opened October 2026. Deadline for receipt by Campus France is 6 January 2027. Results from 12 April 2027.",
+    "note": "Monthly allowance, with other benefits. Amounts were not verified.",
+    "tip": "Ask your target French institution early whether it will nominate you.",
+    "url": "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-program",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "ful",
+    "n": "Fulbright Foreign Student Program",
+    "c": "US",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Varies",
+    "minExp": 0,
+    "nat": "notUS",
+    "v": "ver",
+    "src": "foreign.fulbrightonline.org",
+    "el": "Non-US citizens living in a participating country. Apply through your home-country Fulbright Commission or the US Embassy. About 4,000 grants a year.",
+    "dl": "Dates vary by country. Check your national Fulbright Commission.",
+    "note": "Funding support, J-1 visa sponsorship and a health plan. Amounts vary by country.",
+    "tip": "Show leadership and a plan to return and contribute.",
+    "url": "https://foreign.fulbrightonline.org/applicants",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "kh",
+    "n": "Knight-Hennessy Scholars (Stanford)",
+    "c": "US",
+    "t": "Fellowship",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ver",
+    "src": "knight-hennessy.stanford.edu",
+    "closed": true,
+    "el": "You must also be admitted to a full-time Stanford graduate degree. Bachelor's earned January 2020 or later (2027 cohort). No age or nationality limit stated.",
+    "dl": "The 2027 cohort deadline was 6 October 2026. Applications for the 2028 cohort open in summer 2027.",
+    "note": "Up to three years of tuition, a living stipend and an annual travel stipend.",
+    "tip": "Leadership and purpose matter as much as grades.",
+    "url": "https://knight-hennessy.stanford.edu/admission/before-you-apply/eligibility",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "mext",
+    "n": "Japanese Government (MEXT) Scholarship",
+    "c": "JP",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "maxAge": {
+      "all": 34
+    },
+    "v": "ver",
+    "src": "studyinjapan.go.jp",
+    "el": "Research students under 35 eligible for Masters or doctoral admission. Apply through a Japanese embassy or through a university.",
+    "dl": "Set by your embassy or university. Check their posted window.",
+    "note": "Tuition exempted, round-trip airfare and a monthly allowance.",
+    "tip": "Contact your embassy early. The embassy route has its own timeline.",
+    "url": "https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "gks",
+    "n": "Korean Government Scholarship (GKS)",
+    "c": "KR",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "maxAge": {
+      "all": 39
+    },
+    "v": "ver",
+    "src": "studyinkorea.go.kr",
+    "el": "Under 40, with a GPA of at least 80%. You and both parents must be non-Korean citizens. Masters is 2 years, doctorate 3 years.",
+    "dl": "Typically announced in February, applications February to March, results in June.",
+    "note": "Airfare, Korean language training, tuition and a monthly allowance.",
+    "tip": "Prepare transcripts and a study plan well before February.",
+    "url": "https://www.studyinkorea.go.kr/ko/plan/scholarship.do?tab=gks-tab1",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "schw",
+    "n": "Schwarzman Scholars",
+    "c": "CN",
+    "t": "Fellowship",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "maxAge": {
+      "all": 28
+    },
+    "v": "ver",
+    "src": "schwarzmanscholars.org",
+    "closed": true,
+    "el": "Age 18 to 28 on 1 August of the year you enrol. Bachelor's degree required. One-year Master of Global Affairs at Tsinghua University.",
+    "dl": "Global applicants apply April to September 2027 for the 2028 start. The current window has closed.",
+    "note": "Fully funded Masters in Beijing.",
+    "tip": "Leadership and a clear global outlook are what they look for.",
+    "url": "https://www.schwarzmanscholars.org/admissions/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "aga",
+    "n": "Aga Khan Foundation International Scholarship",
+    "c": "Global",
+    "t": "Foundation",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Partial",
+    "minExp": 0,
+    "nat": "aga",
+    "v": "ver",
+    "src": "akf.org",
+    "closed": true,
+    "el": "Nationals of listed countries (for example Afghanistan, Bangladesh, India, Kenya, Pakistan, Uganda), with financial need, for the first year of postgraduate study. Preference for under-30s.",
+    "dl": "The 2026-27 cycle closed. The next one opens in early 2027.",
+    "note": "Half grant, half loan. Covers tuition and living costs, not travel.",
+    "tip": "Show financial need and a plan to give back.",
+    "url": "https://akf.org/international-scholarship-programme/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "mc",
+    "n": "Mastercard Foundation Scholars Program",
+    "c": "Global",
+    "t": "Foundation",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "af",
+    "v": "ver",
+    "src": "mastercardfdn.org",
+    "el": "Talented, service-minded young people, mainly from Africa, selected by partner universities. No PhD.",
+    "dl": "No central deadline. Each partner university sets its own.",
+    "note": "Tuition, accommodation, books, mentoring, counselling, leadership development and return airfare if needed.",
+    "tip": "Check which universities are partners before you apply.",
+    "url": "https://mastercardfdn.org/en/what-we-do/our-programs/mastercard-foundation-scholars-program/",
+    "verifiedOn": "2026-11-20"
+  },
+  {
+    "id": "daad",
+    "n": "DAAD Scholarships",
+    "c": "DE",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 2,
+    "nat": "open",
+    "v": "ex",
+    "src": "daad.de",
+    "el": "Varies by programme. Many need about two years of professional experience and a strong degree.",
+    "dl": "Often autumn for the following year. Not verified.",
+    "note": "Monthly stipend, insurance and travel, for specific eligible programmes.",
+    "tip": "Pick a programme on the DAAD list first."
+  },
+  {
+    "id": "erm",
+    "n": "Erasmus Mundus Joint Master Scholarship",
+    "c": "EU",
+    "t": "EU",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Strong academic record. Apply to each joint programme directly.",
+    "dl": "Typically January to February. Not verified.",
+    "note": "Tuition, living costs and travel.",
+    "tip": "Apply to several joint programmes. Each has its own essay."
+  },
+  {
+    "id": "swe",
+    "n": "Swedish Institute Scholarship (Global Professionals)",
+    "c": "SE",
+    "t": "Government",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 2,
+    "nat": "open",
+    "v": "ex",
+    "el": "Significant work or leadership experience and an application to a Swedish programme. Eligible countries only.",
+    "dl": "Typically January to February. Not verified.",
+    "note": "Tuition, living costs and travel.",
+    "tip": "Show leadership in a field that matters to your country."
+  },
+  {
+    "id": "swiss",
+    "n": "Swiss Government Excellence Scholarships",
+    "c": "CH",
+    "t": "Government",
+    "lv": [
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Mainly research and PhD level. Eligible countries only.",
+    "dl": "Typically autumn. Not verified.",
+    "note": "Monthly stipend, tuition exemption and insurance.",
+    "tip": "Find a Swiss professor willing to supervise you first."
+  },
+  {
+    "id": "hol",
+    "n": "Holland Scholarship and university excellence awards",
+    "c": "NL",
+    "t": "University",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Partial",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Non-EEA students with strong academic records.",
+    "dl": "Typically December to May. Not verified.",
+    "note": "A one-off or partial award. Combine with another funder.",
+    "tip": "Use it as one part of a funding stack."
+  },
+  {
+    "id": "gates",
+    "n": "Gates Cambridge Scholarship",
+    "c": "UK",
+    "t": "Fellowship",
+    "lv": [
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "notUK",
+    "v": "ex",
+    "el": "Non-UK students admitted to a Cambridge postgraduate degree.",
+    "dl": "Linked to Cambridge deadlines. Not verified.",
+    "note": "Full cost of study at Cambridge.",
+    "tip": "Apply to Cambridge early. The scholarship is part of the same process."
+  },
+  {
+    "id": "rhod",
+    "n": "Rhodes and Clarendon (Oxford)",
+    "c": "UK",
+    "t": "Fellowship",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Rhodes has country and region constituencies. Clarendon is for students admitted to Oxford.",
+    "dl": "Linked to Oxford deadlines. Not verified.",
+    "note": "Full cost of study at Oxford.",
+    "tip": "Check your country's Rhodes constituency and application route."
+  },
+  {
+    "id": "aus",
+    "n": "Australia Awards",
+    "c": "AU",
+    "t": "Government",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 2,
+    "nat": "open",
+    "v": "ex",
+    "el": "Citizens of eligible countries, usually with work experience and a plan to return home.",
+    "dl": "Typically February to April. Not verified.",
+    "note": "Tuition, living costs and travel.",
+    "tip": "Link your study plan to a development priority in your country."
+  },
+  {
+    "id": "csc",
+    "n": "Chinese Government Scholarship (CSC)",
+    "c": "CN",
+    "t": "Government",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "International students applying through the CSC or a Chinese university.",
+    "dl": "Typically January to April. Not verified.",
+    "note": "Tuition, accommodation and a monthly stipend.",
+    "tip": "Apply through both your embassy route and the university route if allowed."
+  },
+  {
+    "id": "rot",
+    "n": "Rotary Peace Fellowships",
+    "c": "Global",
+    "t": "Fellowship",
+    "lv": [
+      "masters"
+    ],
+    "cov": "Full",
+    "minExp": 3,
+    "nat": "open",
+    "v": "ex",
+    "el": "Several years of relevant work experience in peace or development.",
+    "dl": "Typically mid-year. Not verified.",
+    "note": "Full funding at a partner university.",
+    "tip": "Show a record of service and peace-building work."
+  },
+  {
+    "id": "ga",
+    "n": "Graduate and research assistantships (US)",
+    "c": "US",
+    "t": "Assistantship",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Departments fund strong applicants with tuition waivers and stipends, mostly for PhD and thesis Masters.",
+    "dl": "With your application, typically December to January.",
+    "note": "The main route to funding in the US.",
+    "tip": "Apply early and contact faculty whose research matches yours."
+  },
+  {
+    "id": "ra",
+    "n": "Research assistantships and funding packages (Canada)",
+    "c": "CA",
+    "t": "Assistantship",
+    "lv": [
+      "masters",
+      "phd"
+    ],
+    "cov": "Full",
+    "minExp": 0,
+    "nat": "open",
+    "v": "ex",
+    "el": "Thesis-based programmes often come with funding. You need a supervisor.",
+    "dl": "With your application, typically December to January.",
+    "note": "Tuition support and a stipend through your supervisor or department.",
+    "tip": "Read two papers by each supervisor and mention them in your email."
+  }
+]

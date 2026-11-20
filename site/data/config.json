@@ -1,0 +1,379 @@
+{
+  "asOf": "2026-11-20",
+  "FIELDS": {
+    "eng": "Engineering",
+    "cs": "Computer science and AI",
+    "sci": "Natural sciences",
+    "math": "Mathematics and statistics",
+    "health": "Public health",
+    "med": "Medicine and clinical sciences",
+    "biz": "Business and management",
+    "econ": "Economics and finance",
+    "law": "Law",
+    "soc": "Social sciences",
+    "edu": "Education",
+    "arts": "Architecture, arts and design",
+    "hum": "Humanities",
+    "env": "Environment, energy and agriculture"
+  },
+  "PN": {
+    "eng": "MSc Engineering",
+    "cs": "MSc Computer Science and AI",
+    "sci": "MSc Natural Sciences",
+    "math": "MSc Mathematics and Statistics",
+    "health": "MSc Public Health",
+    "med": "MSc Clinical Sciences",
+    "biz": "MSc Management",
+    "econ": "MSc Economics and Finance",
+    "law": "LLM Law",
+    "soc": "MA Social Sciences",
+    "edu": "MA Education",
+    "arts": "MA Architecture and Design",
+    "hum": "MA Humanities",
+    "env": "MSc Environment and Energy"
+  },
+  "CLASSES": [
+    [
+      "first",
+      "First class or equivalent (top grades)",
+      3
+    ],
+    [
+      "upper",
+      "Upper second class, 2:1 or equivalent",
+      2
+    ],
+    [
+      "lower",
+      "Lower second class, 2:2 or equivalent",
+      1
+    ],
+    [
+      "third",
+      "Third class or lower",
+      0
+    ]
+  ],
+  "IELTS": [
+    [
+      0,
+      "Not taken yet"
+    ],
+    [
+      5.5,
+      "5.5"
+    ],
+    [
+      6,
+      "6.0"
+    ],
+    [
+      6.5,
+      "6.5"
+    ],
+    [
+      7,
+      "7.0"
+    ],
+    [
+      7.5,
+      "7.5 or higher"
+    ]
+  ],
+  "FUNDN": {
+    "full": "Full funding only",
+    "part": "Partial funding is fine",
+    "self": "I can self-fund"
+  },
+  "INTAKES": [
+    "Autumn 2027",
+    "Spring 2028",
+    "Autumn 2028"
+  ],
+  "CURS": {
+    "USD": {
+      "s": "$",
+      "r": 1
+    },
+    "EUR": {
+      "s": "€",
+      "r": 0.92
+    },
+    "GBP": {
+      "s": "£",
+      "r": 0.79
+    }
+  },
+  "NAT": {
+    "Ghana": {
+      "cw": 1,
+      "af": 1,
+      "cur": "GHS",
+      "r": 11
+    },
+    "Nigeria": {
+      "cw": 1,
+      "af": 1,
+      "cur": "NGN",
+      "r": 1500
+    },
+    "Kenya": {
+      "cw": 1,
+      "af": 1,
+      "aga": 1,
+      "cur": "KES",
+      "r": 130
+    },
+    "Uganda": {
+      "cw": 1,
+      "af": 1,
+      "aga": 1,
+      "cur": "UGX",
+      "r": 3700
+    },
+    "Tanzania": {
+      "cw": 1,
+      "af": 1,
+      "cur": "TZS",
+      "r": 2600
+    },
+    "South Africa": {
+      "cw": 1,
+      "af": 1,
+      "cur": "ZAR",
+      "r": 18
+    },
+    "Egypt": {
+      "af": 1,
+      "cur": "EGP",
+      "r": 48
+    },
+    "India": {
+      "cw": 1,
+      "aga": 1,
+      "cur": "INR",
+      "r": 85
+    },
+    "Pakistan": {
+      "cw": 1,
+      "aga": 1,
+      "cur": "PKR",
+      "r": 280
+    },
+    "Bangladesh": {
+      "cw": 1,
+      "aga": 1,
+      "cur": "BDT",
+      "r": 120
+    },
+    "Sri Lanka": {
+      "cw": 1,
+      "cur": "LKR",
+      "r": 300
+    },
+    "Nepal": {
+      "cur": "NPR",
+      "r": 135
+    },
+    "Philippines": {
+      "cur": "PHP",
+      "r": 57
+    },
+    "Vietnam": {
+      "cur": "VND",
+      "r": 25000
+    },
+    "Indonesia": {
+      "cur": "IDR",
+      "r": 16000
+    },
+    "China": {
+      "cur": "CNY",
+      "r": 7.2
+    },
+    "Brazil": {
+      "cur": "BRL",
+      "r": 5.5
+    },
+    "Mexico": {
+      "cur": "MXN",
+      "r": 18
+    },
+    "Colombia": {
+      "cur": "COP",
+      "r": 4000
+    },
+    "Turkey": {
+      "cur": "TRY",
+      "r": 34
+    },
+    "United States": {
+      "us": 1,
+      "cur": "USD",
+      "r": 1
+    },
+    "United Kingdom": {
+      "uk": 1,
+      "cur": "GBP",
+      "r": 0.79
+    },
+    "Germany": {
+      "cur": "EUR",
+      "r": 0.92
+    },
+    "Other": {
+      "cur": "USD",
+      "r": 1
+    }
+  },
+  "CC": {
+    "UK": "United Kingdom",
+    "US": "United States",
+    "CA": "Canada",
+    "DE": "Germany",
+    "NL": "Netherlands",
+    "SE": "Sweden",
+    "CH": "Switzerland",
+    "FR": "France",
+    "AU": "Australia",
+    "SG": "Singapore",
+    "JP": "Japan",
+    "KR": "South Korea",
+    "CN": "China",
+    "EU": "Erasmus Mundus (EU)"
+  },
+  "DOCS": [
+    "CV",
+    "Statement of purpose",
+    "Recommendation letter 1",
+    "Recommendation letter 2",
+    "Recommendation letter 3",
+    "Transcripts and certificates",
+    "English test result",
+    "Passport",
+    "Scholarship essays",
+    "Research proposal"
+  ],
+  "TL": [
+    {
+      "id": 1,
+      "t": "Shortlist 6 to 8 programmes",
+      "w": "Now"
+    },
+    {
+      "id": 2,
+      "t": "Book and take your English test",
+      "w": "Nov to Dec 2026"
+    },
+    {
+      "id": 3,
+      "t": "Ask three referees and share your CV",
+      "w": "Nov 2026"
+    },
+    {
+      "id": 4,
+      "t": "Draft and review your statement of purpose",
+      "w": "Dec 2026"
+    },
+    {
+      "id": 5,
+      "t": "Submit first applications",
+      "w": "Dec 2026 to Jan 2027"
+    },
+    {
+      "id": 6,
+      "t": "Apply for scholarships",
+      "w": "Jan to Mar 2027"
+    },
+    {
+      "id": 7,
+      "t": "Compare offers and accept",
+      "w": "Mar to May 2027"
+    },
+    {
+      "id": 8,
+      "t": "Visa, proof of funds and accommodation",
+      "w": "May to Jul 2027"
+    },
+    {
+      "id": 9,
+      "t": "Pre-departure preparation",
+      "w": "Aug 2027"
+    }
+  ],
+  "SVC": [
+    {
+      "id": "sop",
+      "n": "Statement of purpose review",
+      "tk": 25,
+      "eta": "48 hours",
+      "d": "Line-by-line feedback from an admissions editor, with rewrite suggestions.",
+      "doc": true
+    },
+    {
+      "id": "cv",
+      "n": "CV review",
+      "tk": 15,
+      "eta": "24 hours",
+      "d": "Reformat and sharpen your CV for graduate admissions.",
+      "doc": true
+    },
+    {
+      "id": "sch",
+      "n": "Scholarship essay review",
+      "tk": 25,
+      "eta": "48 hours",
+      "d": "Feedback matched to what funders like Chevening, Fulbright and DAAD look for.",
+      "doc": true
+    },
+    {
+      "id": "chat",
+      "n": "Chat with a student or alum",
+      "tk": 10,
+      "eta": "Within 2 days",
+      "d": "Message someone studying or recently graduated in your target country. Ask what it is really like.",
+      "doc": false
+    },
+    {
+      "id": "lor",
+      "n": "Recommendation letter coaching",
+      "tk": 10,
+      "eta": "24 hours",
+      "d": "A briefing pack and talking points to give your referees.",
+      "doc": false
+    },
+    {
+      "id": "str",
+      "n": "1:1 application strategy session",
+      "tk": 30,
+      "eta": "Book within 3 days",
+      "d": "45 minutes with an alum of a university in your target country.",
+      "doc": false
+    },
+    {
+      "id": "mock",
+      "n": "Mock admissions or scholarship interview",
+      "tk": 30,
+      "eta": "Book within 3 days",
+      "d": "A realistic interview with written feedback.",
+      "doc": false
+    },
+    {
+      "id": "visa",
+      "n": "Visa interview preparation",
+      "tk": 20,
+      "eta": "Book within 3 days",
+      "d": "Common questions, documents and mistakes to avoid.",
+      "doc": false
+    },
+    {
+      "id": "ask",
+      "n": "Ask an expert a question",
+      "tk": 5,
+      "eta": "Within 24 hours",
+      "d": "A short written answer to one specific question.",
+      "doc": false
+    }
+  ],
+  "SOPX": "Ever since childhood I have been passionate about building things. I completed a BSc in Civil Engineering and worked for two years on road projects, where I supervised a drainage design that served about 3,000 residents. I want to study structural engineering because many bridges in my region need assessment and repair, and I want to learn modern monitoring methods.\n\nDuring my final year project I tested concrete beams and compared my results with a simple model. This showed me how important data is for safe design.\n\nAfter my Masters I plan to return home and help assess ageing bridges."
+}

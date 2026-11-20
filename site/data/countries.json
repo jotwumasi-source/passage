@@ -1,0 +1,297 @@
+{
+  "UK": {
+    "h": 210,
+    "b": "One-year Masters, a strong brand and several fully funded awards.",
+    "len": "1 year",
+    "tui": "$28k to $50k",
+    "liv": "$1,300 to $1,800 per month",
+    "intake": "September",
+    "work": "Graduate route: 2 years if you apply on or before 31 Dec 2026, and 18 months if you apply on or after 1 Jan 2027. PhD graduates get 3 years.",
+    "money": "Student visa: £1,529 a month for London courses or £1,171 a month elsewhere, for up to 9 months, held for 28 days.",
+    "v": "ver",
+    "src": "gov.uk/graduate-visa, gov.uk/student-visa/money",
+    "good": [
+      "Short degrees",
+      "Many funded awards",
+      "Strong across all fields"
+    ],
+    "watch": [
+      "High tuition",
+      "Chevening and Commonwealth close in October"
+    ],
+    "url": "https://www.gov.uk/graduate-visa",
+    "verifiedOn": "2026-11-20"
+  },
+  "US": {
+    "h": 260,
+    "b": "The biggest choice of programmes. Funding mostly comes through assistantships.",
+    "len": "1 to 2 years",
+    "tui": "$27k to $62k",
+    "liv": "$1,300 to $2,000 per month",
+    "intake": "August or September",
+    "work": "F-1 students can work through Optional Practical Training, with a 24-month extension for STEM degrees. The length of initial OPT was not verified.",
+    "money": "Proof of funds for the first year is required. Amount depends on the university (not verified).",
+    "v": "part",
+    "src": "uscis.gov",
+    "good": [
+      "Research funding",
+      "Wide choice",
+      "STEM extension"
+    ],
+    "watch": [
+      "GRE for some departments",
+      "Visa scrutiny",
+      "Funding is competitive"
+    ],
+    "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-extension-for-stem-students-stem-opt",
+    "verifiedOn": "2026-11-20"
+  },
+  "CA": {
+    "h": 15,
+    "b": "Thesis-based programmes often include funding, with a route to work after study.",
+    "len": "1 to 2 years",
+    "tui": "$7k to $55k",
+    "liv": "$1,300 to $1,700 per month",
+    "intake": "September",
+    "work": "A 3-year Post-Graduation Work Permit is possible for Masters programmes of at least 8 months. Most applicants must give language test results.",
+    "money": "You must show enough money for tuition, living costs and return travel. The amount was not verified.",
+    "v": "ver",
+    "src": "canada.ca",
+    "good": [
+      "Funded thesis Masters",
+      "Multicultural cities",
+      "Work permit route"
+    ],
+    "watch": [
+      "Study permit rules change often",
+      "Course-based Masters can be costly"
+    ],
+    "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html",
+    "verifiedOn": "2026-11-20"
+  },
+  "DE": {
+    "h": 150,
+    "b": "Low or no tuition at many public universities, with strong engineering.",
+    "len": "2 years",
+    "tui": "$0 to $6k",
+    "liv": "$1,000 to $1,300 per month",
+    "intake": "October",
+    "work": "Graduates can usually stay to look for work after the degree. Not verified.",
+    "money": "A blocked account is normally required for the visa. Amount not verified.",
+    "v": "ex",
+    "good": [
+      "Low tuition",
+      "Engineering strength",
+      "DAAD funding"
+    ],
+    "watch": [
+      "Many programmes are in German",
+      "Document checks take weeks"
+    ]
+  },
+  "NL": {
+    "h": 30,
+    "b": "English-taught Masters, high quality and compact cities.",
+    "len": "1 to 2 years",
+    "tui": "$19k to $25k",
+    "liv": "$1,200 to $1,600 per month",
+    "intake": "September",
+    "work": "Orientation year permit: 1 year, apply within 3 years of graduating. A foreign degree must come from a top 200 ranked institution, and the diploma must be evaluated by Nuffic. Fee €254.",
+    "money": "Not verified.",
+    "v": "ver",
+    "src": "ind.nl",
+    "good": [
+      "English-taught",
+      "Orientation year",
+      "Partial awards"
+    ],
+    "watch": [
+      "Housing is very tight",
+      "Top-200 rule for the orientation year"
+    ],
+    "url": "https://www.ind.nl/en/residence-permits/work/residence-permit-for-orientation-year",
+    "verifiedOn": "2026-11-20"
+  },
+  "SE": {
+    "h": 200,
+    "b": "Strong research universities and a well-known government scholarship.",
+    "len": "2 years",
+    "tui": "$16k to $24k",
+    "liv": "$1,000 to $1,300 per month",
+    "intake": "August",
+    "work": "Student work is capped at 15 hours a week for permits granted on or after 11 June 2026. Post-study permit rules were not verified.",
+    "money": "Maintenance of at least SEK 10,656 a month if you apply in 2026.",
+    "v": "part",
+    "src": "migrationsverket.se",
+    "good": [
+      "Research quality",
+      "Full SI scholarship",
+      "Engineering and health"
+    ],
+    "watch": [
+      "Short application window",
+      "Work hour cap for students"
+    ],
+    "url": "https://www.migrationsverket.se/en/you-want-to-apply/study/higher-education.html",
+    "verifiedOn": "2026-11-20"
+  },
+  "CH": {
+    "h": 340,
+    "b": "Top science and engineering, with low tuition and high living costs.",
+    "len": "1.5 to 2 years",
+    "tui": "$1.5k to $3k",
+    "liv": "$2,000 to $2,500 per month",
+    "intake": "September",
+    "work": "Not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "Elite research",
+      "Low tuition"
+    ],
+    "watch": [
+      "Very high living costs",
+      "Excellent grades needed"
+    ]
+  },
+  "FR": {
+    "h": 280,
+    "b": "Strong in engineering, economics and social science, with the Eiffel scholarship.",
+    "len": "2 years",
+    "tui": "$15k to $23k",
+    "liv": "$1,200 to $1,600 per month",
+    "intake": "September",
+    "work": "Not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "Eiffel scholarships",
+      "Strong grandes écoles"
+    ],
+    "watch": [
+      "Institution applies for Eiffel",
+      "French language helps"
+    ]
+  },
+  "AU": {
+    "h": 175,
+    "b": "Wide choice, two intakes a year and a government awards programme.",
+    "len": "1.5 to 2 years",
+    "tui": "$27k to $40k",
+    "liv": "$1,500 to $2,000 per month",
+    "intake": "February and July",
+    "work": "Temporary Graduate visa (subclass 485) exists. Details not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "Two intakes",
+      "Australia Awards",
+      "Strong health and engineering"
+    ],
+    "watch": [
+      "High living costs",
+      "Visa rules change often"
+    ]
+  },
+  "SG": {
+    "h": 130,
+    "b": "Asia's global hub for engineering, computing and business.",
+    "len": "1 to 2 years",
+    "tui": "$22k to $35k",
+    "liv": "$1,500 to $2,000 per month",
+    "intake": "August",
+    "work": "No dedicated post-study pass was found. Graduates usually move to an Employment Pass, which has a minimum salary and a points system.",
+    "money": "Not verified.",
+    "v": "part",
+    "src": "mom.gov.sg",
+    "good": [
+      "Career hub",
+      "English-taught"
+    ],
+    "watch": [
+      "Employment Pass is points-based",
+      "Limited Masters scholarships"
+    ],
+    "url": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
+    "verifiedOn": "2026-11-20"
+  },
+  "JP": {
+    "h": 350,
+    "b": "Top research universities, with the MEXT scholarship for research students.",
+    "len": "2 years",
+    "tui": "$4k to $6k",
+    "liv": "$1,000 to $1,500 per month",
+    "intake": "April or September",
+    "work": "Not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "MEXT funding",
+      "Low tuition",
+      "Research labs"
+    ],
+    "watch": [
+      "Supervisor often needs to accept you first",
+      "Age limit for MEXT"
+    ]
+  },
+  "KR": {
+    "h": 240,
+    "b": "Strong science and technology, with the GKS scholarship.",
+    "len": "2 years",
+    "tui": "$4k to $9k",
+    "liv": "$900 to $1,200 per month",
+    "intake": "September or March",
+    "work": "Not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "GKS funding",
+      "Lab stipends",
+      "Tech strength"
+    ],
+    "watch": [
+      "GKS needs GPA of 80%",
+      "Parents must be non-Korean"
+    ]
+  },
+  "CN": {
+    "h": 60,
+    "b": "Large scholarship programmes and fast-growing research universities.",
+    "len": "2 years",
+    "tui": "$4k to $11k",
+    "liv": "$800 to $1,100 per month",
+    "intake": "September",
+    "work": "Not verified.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "CSC and Schwarzman funding",
+      "Low costs"
+    ],
+    "watch": [
+      "Separate scholarship applications",
+      "Language of instruction varies"
+    ]
+  },
+  "EU": {
+    "h": 110,
+    "b": "Joint Masters taught in two or more European countries, with full scholarships.",
+    "len": "2 years",
+    "tui": "Covered by the scholarship",
+    "liv": "Covered by the scholarship",
+    "intake": "September",
+    "work": "Depends on the countries you study in.",
+    "money": "Not verified.",
+    "v": "ex",
+    "good": [
+      "Fully funded",
+      "Several countries",
+      "Strong network"
+    ],
+    "watch": [
+      "Very competitive",
+      "Each programme has its own application"
+    ]
+  }
+}

@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Passage helps international students compare graduate programmes, check their fit, find scholarships and plan applications.">
+<link rel="icon" href="data:,">
+<title>Passage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: full-width bands (white, grey, black) each with a centred inner column, translucent sticky nav, huge centred type, big-radius tiles, text links with chevrons. Restraint over decoration; one blue accent. */
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --card:#ffffff; --ink:#1d1d1f; --mut:#6e6e73; --line:#d2d2d7;
+  --blue:#0071e3; --link:#0066cc; --onblue:#ffffff; --navbg:rgba(255,255,255,.8);
+  --ok:#1a7f37; --oksoft:#e3f5e8; --warn:#9a5b00; --warnsoft:#fdf0d5; --bad:#c9252d; --badsoft:#fde7e8; --bluesoft:#e8f1fd;
+  --l1:94%; --l2:88%;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#000000; --bg2:#101012; --card:#1d1d1f; --ink:#f5f5f7; --mut:#a1a1a6; --line:#3a3a3d;
+  --blue:#2997ff; --link:#2997ff; --onblue:#000000; --navbg:rgba(22,22,23,.8);
+  --ok:#30d158; --oksoft:#0f2e19; --warn:#ffb340; --warnsoft:#33260a; --bad:#ff6961; --badsoft:#3a1416; --bluesoft:#0e2237;
+  --l1:22%; --l2:14%; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg2:#101012; --card:#1d1d1f; --ink:#f5f5f7; --mut:#a1a1a6; --line:#3a3a3d;
+  --blue:#2997ff; --link:#2997ff; --onblue:#000000; --navbg:rgba(22,22,23,.8);
+  --ok:#30d158; --oksoft:#0f2e19; --warn:#ffb340; --warnsoft:#33260a; --bad:#ff6961; --badsoft:#3a1416; --bluesoft:#0e2237;
+  --l1:22%; --l2:14%; color-scheme:dark}
+.dark{--bg:#000000; --bg2:#000000; --card:#1d1d1f; --ink:#f5f5f7; --mut:#a1a1a6; --line:#3a3a3d; --blue:#2997ff; --link:#2997ff; --onblue:#000000;
+  --ok:#30d158; --oksoft:#0f2e19; --warn:#ffb340; --warnsoft:#33260a; --bad:#ff6961; --badsoft:#3a1416; --bluesoft:#0e2237}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.47;letter-spacing:-.011em;padding-bottom:80px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--navbg);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
+h1,h2,h3,h4,h5{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+.w{max-width:1080px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.band{padding-block:clamp(44px,8vw,96px);background:var(--bg);color:var(--ink)}
+.band.grey{background:var(--bg2)}
+.band.tight{padding-block:clamp(28px,5vw,56px)}
+.num{font-variant-numeric:tabular-nums}
+.mut{color:var(--mut)}
+.small{font-size:.82rem;color:var(--mut)}
+.center{text-align:center}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+
+/* type */
+.display{font-size:clamp(2.5rem,8vw,5.2rem);letter-spacing:-.045em;line-height:1.02;font-weight:700}
+.title{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em;line-height:1.05}
+.head2{font-size:clamp(1.5rem,3.2vw,2.2rem);letter-spacing:-.035em}
+.lede{font-size:clamp(1.1rem,2.2vw,1.5rem);line-height:1.3;color:var(--mut);letter-spacing:-.02em;font-weight:500;max-width:34em}
+.center .lede{margin-inline:auto}
+.eyebrow{font-size:.9rem;font-weight:600;color:var(--warn);letter-spacing:-.01em}
+.grad{background:linear-gradient(90deg,#0071e3,#8e5cf7 55%,#ff7a45);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+.gnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:61;background:var(--navbg);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid color-mix(in srgb,var(--line) 50%,transparent)}
+.gnav .w{display:flex;align-items:center;gap:6px 18px;height:48px}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:1.05rem;letter-spacing:-.03em;flex:none}
+.brand svg{width:20px;height:20px}
+.nav{display:flex;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{text-decoration:none;font-size:.8rem;padding:6px 10px;border-radius:99px;color:var(--ink);opacity:.8;white-space:nowrap}
+.nav a:hover{opacity:1}
+.nav a.on{opacity:1;font-weight:600}
+.tok{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:.78rem;font-weight:600;padding:5px 11px;border-radius:99px;background:var(--bg2);white-space:nowrap;flex:none}
+.tok i{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#ffb340,#ff7a45)}
+.promo{background:var(--bg2);font-size:.82rem;text-align:center;padding:9px 22px;color:var(--mut)}
+.promo b{color:var(--ink);font-weight:600}
+
+/* buttons + links */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--blue);color:var(--onblue);padding:11px 22px;border-radius:980px;font-weight:500;font-size:1rem;min-height:44px;text-decoration:none;letter-spacing:-.01em}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--link);box-shadow:inset 0 0 0 1px var(--blue)}
+.btn.soft{background:var(--bg2);color:var(--ink)}
+.band.grey .btn.soft{background:var(--card)}
+.btn.sm{padding:6px 16px;min-height:34px;font-size:.88rem}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.lnk{color:var(--link);text-decoration:none;font-size:1.05rem;display:inline-flex;gap:4px;align-items:center;background:none;border:0;padding:0}
+.lnk::after{content:"›";font-size:1.25em;line-height:1}
+.lnk:hover{text-decoration:underline}
+.cost{font-weight:600;font-size:.74rem;background:var(--warnsoft);color:var(--warn);border-radius:99px;padding:2px 9px}
+.free{font-weight:600;font-size:.74rem;background:var(--oksoft);color:var(--ok);border-radius:99px;padding:2px 9px}
+.pill{display:inline-block;font-size:.76rem;font-weight:600;padding:3px 11px;border-radius:99px;white-space:nowrap;background:var(--bg2);color:var(--mut)}
+.pill.g{background:var(--oksoft);color:var(--ok)}.pill.a{background:var(--warnsoft);color:var(--warn)}.pill.r{background:var(--badsoft);color:var(--bad)}.pill.b{background:var(--bluesoft);color:var(--blue)}
+.band.grey .pill:not(.g):not(.a):not(.r):not(.b){background:var(--card)}
+.vb{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--bg2);color:var(--mut);white-space:nowrap}
+.vb.ok{background:var(--oksoft);color:var(--ok)}.vb.part{background:var(--bluesoft);color:var(--blue)}
+
+/* hero */
+.hero{padding-top:clamp(36px,7vw,80px);padding-bottom:0;text-align:center}
+.hero .display{max-width:12.5em;margin-inline:auto}
+.hero .lede{margin:18px auto 0}
+.hero .ctas{display:flex;gap:22px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:26px}
+.stage{margin-top:clamp(36px,6vw,64px);border-radius:32px 32px 0 0;background:radial-gradient(60% 80% at 15% 0%,color-mix(in srgb,#0071e3 22%,transparent),transparent 70%),radial-gradient(50% 70% at 90% 10%,color-mix(in srgb,#ff7a45 20%,transparent),transparent 70%),radial-gradient(60% 60% at 55% 100%,color-mix(in srgb,#8e5cf7 20%,transparent),transparent 70%),var(--bg2);padding:clamp(24px,5vw,56px) clamp(14px,4vw,40px) 0;overflow:hidden;text-align:left}
+.stage .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
+.stage .card:nth-child(1){transform:translateY(14px)}
+.stage .card:nth-child(3){transform:translateY(28px)}
+@media (max-width:820px){.stage .grid{grid-template-columns:minmax(0,1fr)}.stage .card:nth-child(n){transform:none}.stage{padding-bottom:20px}}
+.card{background:var(--card);border-radius:24px;padding:22px;min-width:0;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06)}
+.dark .card,.dark.card{box-shadow:none}
+.card h4{font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:0;margin-bottom:10px;text-transform:none}
+.card .big{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1.15}
+.ring{width:84px;height:84px;flex:none}
+
+/* bento + tiles */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.tile{background:var(--card);border-radius:28px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none;position:relative;overflow:hidden;min-height:260px}
+.band:not(.grey):not(.dark) .tile{background:var(--bg2)}
+.tile.s2{grid-column:span 2}.tile.s3{grid-column:span 3}.tile.s4{grid-column:span 4}
+.tile.black{background:#000;color:#f5f5f7;--mut:#a1a1a6;--link:#2997ff}
+.tile.blue{background:linear-gradient(160deg,#0071e3,#5b3df5);color:#fff;--mut:rgba(255,255,255,.8);--link:#fff}
+.tile h3{font-size:clamp(1.4rem,2.6vw,2rem)}
+.tile p{color:var(--mut);font-size:1.02rem}
+.tile .foot{margin-top:auto;padding-top:14px}
+@media (max-width:860px){.bento{grid-template-columns:minmax(0,1fr)}.tile.s2,.tile.s3,.tile.s4{grid-column:auto}.tile{min-height:0}}
+.mini{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.shelf{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(22px,env(safe-area-inset-left,0px)) 24px;margin:0 calc(-1*max(22px,env(safe-area-inset-left,0px)));scrollbar-width:none}
+.shelf::-webkit-scrollbar{display:none}
+.cty{flex:0 0 min(300px,78vw);scroll-snap-align:start;border-radius:28px;padding:26px;min-height:380px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--ink);background:linear-gradient(165deg,hsl(var(--h) 70% var(--l1)),hsl(calc(var(--h) + 35) 70% var(--l2)))}
+.cty h3{font-size:1.9rem}
+.cty .st{margin-top:auto;display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.cty .st b{font-size:1.05rem}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fgrid a{background:var(--card);border-radius:20px;padding:18px 20px;text-decoration:none;font-weight:600;letter-spacing:-.02em;display:flex;flex-direction:column;gap:2px}
+.fgrid a span{font-weight:400;font-size:.86rem;color:var(--mut)}
+.fgrid a:hover{box-shadow:0 0 0 2px var(--blue)}
+
+/* page header */
+.ph{padding-top:clamp(30px,5vw,56px)}
+.ph .title{margin-bottom:10px}
+.crumb{font-size:.84rem;color:var(--mut);margin-bottom:12px}
+.crumb a{text-decoration:none}.crumb a:hover{text-decoration:underline}
+
+/* filters + results */
+.fbar{background:var(--card);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.fr{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.field{display:flex;flex-direction:column;gap:6px;min-width:150px;flex:1}
+.field>label,.lab{font-size:.78rem;font-weight:600;color:var(--mut)}
+.in,.sel,.ta{font:inherit;font-size:.98rem;color:var(--ink);background:var(--bg2);border:1px solid transparent;border-radius:12px;padding:11px 14px;width:100%;min-height:46px}
+.band.grey .in,.band.grey .sel,.band.grey .ta{background:var(--card)}
+.fbar .in,.fbar .sel,.panel .in,.panel .sel,.panel .ta{background:var(--bg2)}
+.in:focus,.sel:focus,.ta:focus{border-color:var(--blue);outline:none}
+.ta{min-height:190px;resize:vertical;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.cc{border:0;background:var(--bg2);padding:7px 15px;border-radius:99px;font-weight:500;font-size:.9rem}
+.band.grey .cc{background:var(--card)}.fbar .cc,.panel .cc{background:var(--bg2)}
+.cc:hover{box-shadow:inset 0 0 0 1px var(--blue)}
+.cc.on{background:var(--blue)!important;color:var(--onblue);font-weight:600}
+.results{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.pc{background:var(--card);border-radius:26px;padding:24px 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;min-width:0}
+.pc .t{font-size:1.35rem;font-weight:700;letter-spacing:-.03em;text-decoration:none;line-height:1.15}
+.pc .t:hover{text-decoration:underline}
+.pc .facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px 20px;margin-top:6px}
+.pc .facts span{font-size:.8rem;color:var(--mut)}
+.pc .facts b{display:block;color:var(--ink);font-weight:600;font-size:1rem;letter-spacing:-.015em}
+.pc .acts{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.heart{border:0;background:var(--bg2);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;font-size:1.05rem}
+.heart.on{background:var(--blue);color:var(--onblue)}
+.cmpl{display:flex;align-items:center;gap:7px;font-size:.9rem;cursor:pointer}
+.cmpl input,.tl input{accent-color:var(--blue);width:18px;height:18px}
+#cmpbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:rgba(29,29,31,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:#f5f5f7;z-index:50;padding:8px 10px 8px 20px;border-radius:99px;display:flex;gap:12px;align-items:center;max-width:94vw;box-shadow:0 8px 30px rgba(0,0,0,.25);font-size:.9rem}
+#cmpbar[hidden]{display:none}
+#cmpbar .btn{min-height:36px;padding:6px 16px;font-size:.9rem}
+#cmpbar .btn.soft{background:#3a3a3d;color:#f5f5f7}
+
+/* programme page */
+.lnav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 48px);z-index:40;background:var(--navbg);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid color-mix(in srgb,var(--line) 50%,transparent)}
+.lnav .w{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;align-items:center;height:46px}
+.lnav a{text-decoration:none;font-size:.82rem;padding:6px 12px;border-radius:99px;white-space:nowrap;color:var(--mut)}
+.lnav a:hover{color:var(--ink)}
+.facts4{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:22px 28px;margin-top:30px}
+.facts4 .k{font-size:.82rem;color:var(--mut)}
+.facts4 .v{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-top:2px}
+.sec{scroll-margin-top:110px}
+.sec>h2{margin-bottom:18px}
+.panel{background:var(--card);border-radius:24px;padding:24px;min-width:0}
+.panel.flat{background:var(--bg2)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.ck{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ck:last-child{border-bottom:0}
+.dot{width:12px;height:12px;border-radius:50%;margin-top:7px}
+.dot.g{background:var(--ok)}.dot.a{background:#ffb340}.dot.r{background:var(--bad)}
+.kv{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0}
+.kv>div{padding:12px 0;border-bottom:1px solid var(--line)}
+.kv>div:nth-last-child(-n+2){border-bottom:0}
+.kv .k{color:var(--mut);font-size:.92rem}
+@media (max-width:560px){.kv{grid-template-columns:minmax(0,1fr)}.kv .k{padding-bottom:0;border-bottom:0}}
+.sch{display:flex;flex-direction:column;gap:10px;background:var(--card);border-radius:24px;padding:22px;text-decoration:none;min-width:0}
+.sch:hover{box-shadow:0 0 0 2px var(--blue)}
+.sch h5{font-size:1.15rem;letter-spacing:-.025em}
+.sch p{color:var(--mut);font-size:.95rem}
+.callout{background:var(--bluesoft);border-radius:20px;padding:18px 20px}
+.callout.am{background:var(--warnsoft)}
+.verdict{border-radius:20px;padding:18px 20px;margin-bottom:12px}
+.verdict.g{background:var(--oksoft)}.verdict.a{background:var(--warnsoft)}.verdict.r{background:var(--badsoft)}
+.verdict h3{margin-bottom:4px;font-size:1.2rem}
+.tw{overflow-x:auto;border-radius:20px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+th{font-size:.78rem;color:var(--mut);text-align:left;padding:14px 18px;font-weight:600;vertical-align:bottom}
+td{padding:14px 18px;border-top:1px solid var(--line);vertical-align:top}
+td.k{color:var(--mut);width:160px}
+details.q{border-top:1px solid var(--line);padding:16px 0}
+details.q summary{cursor:pointer;font-weight:600;letter-spacing:-.015em}
+details.q p{margin-top:8px;color:var(--mut)}
+.art{max-width:700px;margin:0 auto}
+.art h2{margin:34px 0 10px;font-size:1.6rem}
+.art p{margin-bottom:12px;font-size:1.08rem;line-height:1.55}
+.subnav{display:flex;gap:4px;overflow-x:auto;margin-bottom:26px;scrollbar-width:none}
+.subnav a{padding:8px 16px;border-radius:99px;text-decoration:none;font-weight:500;font-size:.92rem;background:var(--bg2);white-space:nowrap}
+.band:not(.grey) .subnav a.on,.subnav a.on{background:var(--blue);color:var(--onblue)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.split{grid-template-columns:minmax(0,1fr)}}
+.meter{height:8px;border-radius:99px;background:var(--bg2);overflow:hidden}
+.panel .meter{background:var(--bg2)}
+.meter i{display:block;height:100%;background:var(--blue);border-radius:99px}
+.bl{display:grid;grid-template-columns:140px minmax(0,1fr) 56px;gap:12px;align-items:center;font-size:.92rem}
+@media (max-width:520px){.bl{grid-template-columns:96px minmax(0,1fr) 48px}}
+.svc{display:flex;flex-direction:column;gap:10px;background:var(--card);border-radius:24px;padding:24px;min-width:0}
+.svc h5{font-size:1.15rem}
+.report{background:var(--card);border-radius:24px;padding:24px;box-shadow:inset 0 0 0 2px var(--blue)}
+.report ul{margin:8px 0 0;padding-left:20px}
+.bal{font-size:3.6rem;font-weight:700;letter-spacing:-.05em;line-height:1}
+.pack{display:flex;flex-direction:column;gap:6px;background:var(--bg2);border-radius:20px;padding:18px;position:relative}
+.pack.best{box-shadow:inset 0 0 0 2px var(--blue)}
+.pack .t{font-size:2rem;font-weight:700;letter-spacing:-.04em}
+.hist{display:flex;flex-direction:column}
+.hist>div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.hist>div:last-child{border-bottom:0}
+.tl{display:flex;flex-direction:column}
+.tl label{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.tl label:last-child{border-bottom:0}
+.tl .w2{font-size:.82rem;color:var(--mut);white-space:nowrap}
+.tl .x{text-decoration:line-through;color:var(--mut)}
+.opt{display:flex;gap:10px;align-items:center}
+.fnote{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:.8rem;color:var(--mut);line-height:1.5}
+.fnote ol{margin:8px 0 0;padding-left:18px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;z-index:70;padding:16px}
+#modal[hidden]{display:none}
+.sheet{background:var(--bg);color:var(--ink);border-radius:28px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;padding:26px;display:flex;flex-direction:column;gap:16px}
+@media (min-width:600px){#modal{align-items:center}}
+.err{color:var(--bad);font-size:.9rem;font-weight:600}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));background:rgba(29,29,31,.95);color:#f5f5f7;padding:11px 18px;border-radius:99px;font-size:.9rem;max-width:min(92vw,460px);z-index:80}
+@media (prefers-reduced-motion:no-preference){.btn,.cc,.tile,.sch,.fgrid a{transition:box-shadow .15s,filter .15s,background .15s}}
+</style>
+</head>
+<body>
+<header class="gnav"><div class="w">
+  <a class="brand" href="#home" aria-label="Passage home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M6 18c0-6 4-10 12-10"/><path d="M14 4l4 4-4 4"/></svg>Passage</a>
+  <nav class="nav" id="nav" aria-label="Main"></nav>
+  <a class="tok" id="tok" href="#wallet"></a>
+</div></header>
+<main id="view"></main>
+<div id="cmpbar" hidden></div>
+<div id="modal" hidden role="dialog" aria-modal="true" aria-label="Request a service"></div>
+<div id="toast" hidden></div>
+<noscript><p style="padding:40px;text-align:center">Passage needs JavaScript.</p></noscript>
+<script src="vendor/fuse.min.js"></script>
+<script>
+(async function(){
+  /* Data lives in data/*.json. Edit those files, not this script. */
+  var D={};
+  try{
+    await Promise.all(['config','universities','scholarships','countries','articles'].map(function(f){
+      return fetch('data/'+f+'.json').then(function(r){if(!r.ok)throw new Error(f+'.json '+r.status);return r.json()}).then(function(j){D[f]=j});
+    }));
+  }catch(e){
+    document.getElementById('view').innerHTML='<div class="w"><p style="padding:60px 0">Could not load the data files ('+e.message+'). Serve the site over http, for example: python -m http.server --directory site</p></div>';
+    return;
+  }
+  var ENR={};
+  try{var er=await fetch('data/enrichment.json');if(er.ok)ENR=await er.json()}catch(e){}
+  var TODAY=new Date((D.config.asOf||'2026-11-20')+'T00:00:00');
+  var C=D.config;
+  var FIELDS=C.FIELDS,PN=C.PN,CLASSES=C.CLASSES,IELTS=C.IELTS,FUNDN=C.FUNDN,INTAKES=C.INTAKES,CURS=C.CURS,NAT=C.NAT,CC=C.CC,DOCS=C.DOCS,TL=C.TL,SVC=C.SVC,SOPX=C.SOPX;
+  var U=D.universities,SCH=D.scholarships,COUNTRY=D.countries,ARTS=D.articles;
+
+  /* ================= STATE ================= */
+  var S={
+    P:{nat:'Ghana',age:26,field:'eng',level:'masters',ctry:['UK','DE','CA','NL'],cls:'upper',ielts:7,exp:2,res:false,fund:'full',intake:'Autumn 2027',budget:8000},
+    sl:[{id:'lee',st:'Researching'}],cmp:[],docs:{},tl:{},cur:'USD',
+    tokens:40,hist:[{d:'Welcome bonus',a:40}],reqs:[],report:null,adv:null,
+    F:{c:null,q:'',tui:'any',dur:'any',fund:false,fit:'any'},sort:'fit',sc:{c:'all',t:'all',full:false,open:false},sop:SOPX,sopFull:null
+  };
+  S.sl=[{id:'tum',st:'Researching'},{id:'man',st:'Researching'}];
+
+  /* ================= HELPERS ================= */
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var tT;function toast(m){var t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tT);tT=setTimeout(function(){t.hidden=true},3400)}
+  function uni(id){return U.filter(function(u){return u.id===id})[0]}
+  function sch(id){return SCH.filter(function(s){return s.id===id})[0]}
+  function inSl(id){return S.sl.filter(function(s){return s.id===id}).length>0}
+  function clsScore(){return CLASSES.filter(function(c){return c[0]===S.P.cls})[0][2]}
+  function clsName(){return CLASSES.filter(function(c){return c[0]===S.P.cls})[0][1]}
+  function spend(n,d){S.tokens-=n;S.hist.unshift({d:d,a:-n});updTok()}
+  function docProg(){var t=0;DOCS.forEach(function(d){t+=(+S.docs[d]||0)});return t/(DOCS.length*2)}
+  function curInfo(){if(S.cur==='LOCAL'){var n=NAT[S.P.nat]||NAT.Other;return {s:n.cur+' ',r:n.r}}return CURS[S.cur]}
+  function money(usd){var c=curInfo();return c.s+Math.round(usd*c.r).toLocaleString('en-US')}
+  function rangeM(a,b){return a===b?(a===0?'Covered or free':money(a)):money(a)+' to '+money(b)}
+  function progName(u){return S.P.level==='phd'?'PhD, '+FIELDS[S.P.field]:PN[S.P.field]}
+  function daysTo(iso){return Math.round((new Date(iso+'T00:00:00')-TODAY)/86400000)}
+  function fmtDate(iso){return new Date(iso+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+  function costLow(u){return u.tl+u.lm*12}
+  function costHigh(u){return u.th+u.lm*12}
+  function comp(u){return u.sel===3?'Very high':u.sel===2?'High':'Moderate'}
+  function vb(v){return v==='ver'?'<span class="vb ok">Verified</span>':v==='part'?'<span class="vb part">Partly verified</span>':'<span class="vb">Example</span>'}
+  function natOk(s){var n=NAT[S.P.nat]||NAT.Other;switch(s.nat){case 'cw':return !!n.cw;case 'af':return !!n.af;case 'aga':return !!n.aga;case 'notUK':return !n.uk;case 'notUS':return !n.us;default:return true}}
+  function schFit(s){
+    var P=S.P;
+    if(s.lv.indexOf(P.level)<0)return {k:'n',t:'Different level'};
+    if(!natOk(s))return {k:'r',t:'Not open to your citizenship'};
+    if(s.maxAge){var m=s.maxAge[P.level]||s.maxAge.all;if(m&&+P.age>m)return {k:'r',t:'Age limit '+m}}
+    if(+P.exp<s.minExp)return {k:'a',t:'Needs '+s.minExp+' years of experience'};
+    return {k:'g',t:s.v==='ver'?'You likely qualify':'You may qualify'};
+  }
+  function fullFund(u){return u.fund.some(function(id){var s=sch(id);return s&&s.cov==='Full'&&s.lv.indexOf(S.P.level)>-1&&schFit(s).k!=='r'})}
+  function fitOf(u){
+    var P=S.P,s=clsScore();
+    if(+P.ielts>0)s+=(+P.ielts>=u.ielts?1:-1);
+    if(+P.exp>=2)s+=1;
+    if(P.res)s+=(P.level==='phd'?2:1);
+    var k;
+    if(clsScore()<u.minC)k='Long shot';
+    else if(s>=u.sel+2)k='Safe';else if(s>=u.sel+1)k='Target';else if(s>=u.sel)k='Reach';else k='Long shot';
+    if(u.sel===3&&k==='Safe')k='Target';
+    return k;
+  }
+  var FITC={'Safe':'g','Target':'b','Reach':'a','Long shot':'r'};
+  var FITR={'Target':0,'Safe':1,'Reach':2,'Long shot':3};
+  var FITP={'Safe':1,'Target':.75,'Reach':.5,'Long shot':.25};
+  function ring(k){
+    var p=FITP[k],c=2*Math.PI*34,col=k==='Safe'?'var(--ok)':k==='Target'?'var(--blue)':k==='Reach'?'#ff9f0a':'var(--bad)';
+    return '<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="34" fill="none" stroke="var(--bg2)" stroke-width="9"/><circle cx="42" cy="42" r="34" fill="none" stroke="'+col+'" stroke-width="9" stroke-linecap="round" stroke-dasharray="'+(c*p).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg>';
+  }
+  function explainFit(u){
+    var P=S.P,rows=[],cn=CLASSES.filter(function(c){return c[2]===u.minC})[0][1];
+    rows.push(clsScore()>=u.minC?[clsScore()>u.minC?'g':'a','Academic record','Your '+clsName().toLowerCase()+' meets the usual minimum ('+cn.toLowerCase()+').']:['r','Academic record','Your '+clsName().toLowerCase()+' is below the usual minimum ('+cn.toLowerCase()+').']);
+    rows.push(+P.ielts===0?['a','English test','You have not taken a test yet. This programme asks for IELTS '+u.ielts+' or equivalent.']:+P.ielts>=u.ielts?['g','English test','IELTS '+P.ielts+' meets the '+u.ielts+' requirement.']:['r','English test','IELTS '+P.ielts+' is below the '+u.ielts+' requirement. Retake, or ask about a waiver.']);
+    rows.push(+P.exp>=2?['g','Experience',P.exp+' years of work experience helps, and unlocks several full awards.']:['a','Experience','Under 2 years. Several full awards ask for 2 or more.']);
+    rows.push(P.res?['g','Research','Your research or project work strengthens your application.']:['a','Research','Add a research or project example to your statement.']);
+    return rows;
+  }
+  function readiness(){
+    var P=S.P,a=[];
+    a.push(['Academic record',Math.round(clsScore()/3*30),30]);
+    a.push(['English test',+P.ielts>=7?20:+P.ielts>=6.5?16:+P.ielts>=6?10:+P.ielts>0?5:0,20]);
+    a.push(['Experience',Math.min(15,Math.round(+P.exp/3*15)),15]);
+    a.push(['Research',P.res?10:2,10]);
+    a.push(['Documents',Math.round(docProg()*25),25]);
+    return {parts:a,total:a.reduce(function(s,x){return s+x[1]},0)};
+  }
+  function candidates(){return U.filter(function(u){return u.f.indexOf(S.P.field)>-1&&S.P.ctry.indexOf(u.c)>-1})}
+  function sw(){
+    return '<div class="chips">'+[['USD','USD'],['EUR','EUR'],['GBP','GBP'],['LOCAL',(NAT[S.P.nat]||NAT.Other).cur+' (local)']].map(function(x){return '<button class="cc'+(S.cur===x[0]?' on':'')+'" data-act="cur" data-c="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>';
+  }
+  function band(inner,cls){return '<section class="band '+(cls||'')+'"><div class="w">'+inner+'</div></section>'}
+  function crumb(parts){return '<div class="crumb">'+parts.map(function(p){return p[1]?'<a href="#'+p[1]+'">'+esc(p[0])+'</a>':esc(p[0])}).join(' / ')+'</div>'}
+  function foot(){
+    return band('<div class="fnote" style="margin-top:0;border-top:0;padding-top:0"><b>About our data.</b><ol><li>Items marked <b>Verified</b> were read from official university, funder or government pages on 20 November 2026. <b>Partly verified</b> means some facts on the page were read. <b>Example</b> means the value is indicative and must be checked on the official site.</li><li>Many university sites block automated reading, so most programme details are still examples. The live app would verify each one with the university and show the date.</li><li>University background (founding year, size, research output, links) comes from open datasets: Wikidata, ROR and OpenAlex, all CC0.</li><li>Exchange rates are examples. Fit labels are guidance, not predictions. Universities rarely publish acceptance rates, so we show how competitive a programme is instead.</li></ol></div>','grey tight');
+  }
+
+  /* ================= SHELL ================= */
+  function updTok(){$('tok').innerHTML='<i></i>'+S.tokens+' tokens'}
+  function route(){var h=(location.hash||'#home').slice(1),i=h.indexOf('-');return {r:i>0?h.slice(0,i):h,p:i>0?h.slice(i+1):''}}
+  function updNav(r){
+    var map={prog:'find',country:'countries',sch:'scholarships',art:'advice',sop:'tools',compare:'tools',profile:'me',wishlist:'me',plan:'me',wallet:'me'};
+    var cur=map[r]||r;
+    var it=[['find','Programmes'],['countries','Countries'],['scholarships','Scholarships'],['advice','Advice'],['tools','Tools'],['help','Expert help'],['wishlist','My Passage'+(S.sl.length?' ('+S.sl.length+')':''),'me']];
+    $('nav').innerHTML=it.map(function(i){return '<a href="#'+i[0]+'" class="'+((i[2]||i[0])===cur?'on':'')+'">'+i[1]+'</a>'}).join('');
+  }
+  function updCmp(r){
+    var b=$('cmpbar');
+    if(!S.cmp.length||r==='compare'){b.hidden=true;return}
+    b.hidden=false;
+    b.innerHTML='<span>'+S.cmp.length+' to compare</span><a class="btn" href="#compare">Compare</a><button class="btn soft" data-act="cmpclear">Clear</button>';
+  }
+  function subnav(r){return '<nav class="subnav" aria-label="My Passage">'+[['profile','Profile'],['wishlist','Wishlist'],['plan','Plan'],['wallet','Wallet']].map(function(i){return '<a href="#'+i[0]+'" class="'+(i[0]===r?'on':'')+'">'+i[1]+'</a>'}).join('')+'</nav>'}
+  function ph(eyebrow,title,sub,right){
+    return '<div class="ph"><div class="row" style="align-items:flex-end;justify-content:space-between"><div style="max-width:40em"><p class="eyebrow">'+eyebrow+'</p><h1 class="title">'+title+'</h1>'+(sub?'<p class="lede">'+sub+'</p>':'')+'</div>'+(right||'')+'</div></div>';
+  }
+
+  /* ================= HOME ================= */
+  var ADVQ=[['cheap','Cheapest first year?'],['fund','Full funding I can win?'],['soon','Closest deadline?'],['next','What should I do this month?']];
+  function advAnswer(k){
+    var c=candidates(),h='';
+    if(!c.length)return '<div class="callout"><p>Pick countries in your profile first.</p></div>';
+    if(k==='cheap'){var a=c.slice().sort(function(x,y){return costLow(x)-costLow(y)}).slice(0,3);h='<p><b>Lowest estimated first-year cost (tuition plus living):</b></p><ul>'+a.map(function(u){return '<li>'+esc(u.n)+': from '+money(costLow(u))+'</li>'}).join('')+'</ul>'}
+    else if(k==='fund'){var f=c.filter(function(u){return fullFund(u)&&fitOf(u)!=='Long shot'});h='<p><b>Programmes with a full-funding route and a realistic fit:</b></p>'+(f.length?'<ul>'+f.slice(0,4).map(function(u){return '<li>'+esc(u.n)+' ('+fitOf(u)+')</li>'}).join('')+'</ul>':'<p class="mut">None right now. More experience or research widens the list.</p>')}
+    else if(k==='soon'){var d=c.slice().sort(function(x,y){return daysTo(x.by)-daysTo(y.by)}).slice(0,3);h='<p><b>Closest typical deadlines:</b></p><ul>'+d.map(function(u){return '<li>'+esc(u.n)+': '+fmtDate(u.by)+' ('+daysTo(u.by)+' days)</li>'}).join('')+'</ul>'}
+    else{var s=[];if(+S.P.ielts===0)s.push('Book an English test.');if(S.sl.length<6)s.push('Shortlist at least 6 programmes. You have '+S.sl.length+'.');if((+S.docs['Statement of purpose']||0)<2)s.push('Draft your statement of purpose and run the free SOP check.');if((+S.docs['Recommendation letter 1']||0)===0)s.push('Ask your first referee.');if(!s.length)s.push('Book an expert review of your statement of purpose.');h='<p><b>This month:</b></p><ul>'+s.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'}
+    return '<div class="callout">'+h+'<p class="small" style="margin-top:8px">Prototype: rule-based. The full app adds an AI advisor grounded in verified data.</p></div>';
+  }
+  function vHome(){
+    var P=S.P,c=candidates().map(function(u){return {u:u,k:fitOf(u)}}).sort(function(a,b){return FITR[a.k]-FITR[b.k]}),top=c[0];
+    var likely=SCH.filter(function(s){return schFit(s).k==='g'&&!s.closed&&(s.cov==='Full'||P.fund!=='full')});
+    var stage;
+    if(top){
+      var u=top.u,low=costLow(u),gap=low-P.budget;
+      stage='<div class="grid"><div class="card"><h4>Your fit</h4><div class="row" style="flex-wrap:nowrap">'+ring(top.k)+'<div><div class="big">'+esc(u.n)+'</div><span class="pill '+FITC[top.k]+'" style="margin-top:8px">'+top.k+'</span></div></div></div>'+
+        '<div class="card"><h4>Funding you may qualify for</h4><div class="big">'+likely.length+' routes</div><p class="mut" style="margin-top:6px">'+(likely[0]?esc(likely[0].n):'Add experience to unlock more')+'</p><div class="mini"><span class="pill g">'+likely.filter(function(s){return s.cov==='Full'}).length+' full funding</span></div></div>'+
+        '<div class="card"><h4>First year at '+esc(u.n.split(' ')[0]==='University'?u.city:u.n.split(' ')[0])+'</h4><div class="big num">'+rangeM(low,costHigh(u))+'</div><div class="meter" style="margin-top:14px"><i style="width:'+Math.min(100,Math.round(P.budget/Math.max(low,1)*100))+'%"></i></div><p class="small" style="margin-top:6px">'+(gap<=0?'Within your budget':'Gap of about '+money(gap)+' against your budget')+'</p></div></div>';
+    }else stage='<div class="card"><p>Pick countries in your profile to see matches.</p></div>';
+    var fields=Object.keys(FIELDS).map(function(k){return '<a href="#find" data-act="fieldgo" data-k="'+k+'">'+FIELDS[k]+'<span>'+U.filter(function(x){return x.f.indexOf(k)>-1}).length+' universities</span></a>'}).join('');
+    var shelf=Object.keys(COUNTRY).map(function(k){var d=COUNTRY[k];return '<a class="cty" style="--h:'+d.h+'" href="#country-'+k+'"><span class="small" style="color:inherit;opacity:.7">'+d.len+'</span><h3>'+CC[k]+'</h3><p style="opacity:.8">'+d.b+'</p><div class="st"><span style="opacity:.7">Tuition</span><b>'+d.tui+'</b></div></a>'}).join('');
+    var funds=SCH.filter(function(s){return s.v==='ver'}).slice(0,4).map(function(s){var f=schFit(s);return '<a class="sch" href="#sch-'+s.id+'"><div class="row"><span class="pill">'+esc(CC[s.c]||s.c)+'</span>'+(s.closed?'<span class="pill a">Closed this cycle</span>':'')+'</div><h5>'+esc(s.n)+'</h5><p>'+esc(s.note)+'</p><div class="row" style="margin-top:auto"><span class="pill '+(f.k==='g'?'g':f.k==='a'?'a':f.k==='r'?'r':'')+'">'+f.t+'</span>'+vb(s.v)+'</div></a>'}).join('');
+    var arts=ARTS.slice(0,3).map(function(a){return '<a class="tile" href="#art-'+a.id+'" style="min-height:200px"><span class="pill b" style="align-self:flex-start">'+a.tag+'</span><h3 style="font-size:1.4rem">'+esc(a.t)+'</h3><span class="small">'+a.min+' min read · Reviewed 20 Nov 2026</span></a>'}).join('');
+    var vcount=U.filter(function(u){return u.v!=='ex'}).length,scv=SCH.filter(function(s){return s.v==='ver'}).length;
+    return '<div class="promo"><b>Prototype.</b> Facts marked Verified were read from official pages on 20 Nov 2026. Everything else is example data.</div>'+
+      band('<p class="eyebrow">Passage</p><h1 class="display" style="margin-top:10px">Study anywhere.<br>Know your <span class="grad">fit</span> first.</h1><p class="lede">Compare graduate programmes in '+Object.keys(COUNTRY).length+' destinations, see your real chances, and find funding you can actually win.</p>'+
+        '<div class="ctas"><a class="btn" href="#find">Find programmes</a><a class="lnk" href="#profile">Build your profile</a></div><div class="stage">'+stage+'</div>','hero')+
+      band('<h2 class="title center" style="margin-bottom:36px">Everything between<br>you and the offer.</h2><div class="bento">'+
+        '<a class="tile s4 black" href="#find"><p class="eyebrow">Fit</p><h3>See where you stand, before you apply.</h3><p>Every programme shows Safe, Target, Reach or Long shot, with the reasons behind it.</p><div class="mini"><span class="pill g">Safe</span><span class="pill b">Target</span><span class="pill a">Reach</span><span class="pill r">Long shot</span></div><span class="lnk foot">Explore programmes</span></a>'+
+        '<a class="tile s2" href="#compare"><p class="eyebrow">Compare</p><h3>Side by side. Down to the dollar.</h3><p>Costs, deadlines and funding for up to three programmes.</p><span class="lnk foot">Compare</span></a>'+
+        '<a class="tile s2" href="#scholarships"><p class="eyebrow">Fund</p><h3>Scholarships matched to your passport.</h3><p>Nationality, age and experience rules, checked for you.</p><span class="lnk foot">Find funding</span></a>'+
+        '<a class="tile s2" href="#plan"><p class="eyebrow">Plan</p><h3>Every document. Every deadline.</h3><p>A checklist and timeline built around your intake.</p><span class="lnk foot">Open your plan</span></a>'+
+        '<a class="tile s2 blue" href="#sop"><p class="eyebrow" style="color:#fff;opacity:.85">SOP clinic</p><h3>A sharper statement in minutes.</h3><p>Paste a draft. Get an instant, free check.</p><span class="lnk foot">Try it free</span></a></div>')+
+      band('<div class="row" style="justify-content:space-between;margin-bottom:22px"><h2 class="title">Where will you go?</h2><a class="lnk" href="#countries">All countries</a></div><div class="shelf">'+shelf+'</div>','grey')+
+      band('<div class="row" style="justify-content:space-between;margin-bottom:22px"><h2 class="title">Browse by field.</h2></div><div class="fgrid">'+fields+'</div>')+
+      band('<p class="eyebrow">Scholarships</p><h2 class="title" style="margin:6px 0 10px">'+SCH.length+' ways to fund it.</h2><p class="lede">'+scv+' read from official pages on 20 November 2026. See which ones are open to your citizenship, age and experience.</p><div class="grid2" style="margin-top:34px">'+funds+'</div><div style="margin-top:26px"><a class="lnk" href="#scholarships">All scholarships</a></div>','dark')+
+      band('<div class="split"><div><h2 class="title">Ask Passage.</h2><p class="lede" style="margin-top:10px">Quick answers from your profile. Free.</p></div><div class="stack"><div class="chips">'+ADVQ.map(function(q){return '<button class="cc" data-act="adv" data-k="'+q[0]+'">'+q[1]+'</button>'}).join('')+'</div><div id="advout">'+(S.adv||'')+'</div></div></div>','grey')+
+      band('<div class="row" style="justify-content:space-between;margin-bottom:22px"><h2 class="title">Guides.</h2><a class="lnk" href="#advice">All guides</a></div><div class="grid3">'+arts+'</div>')+
+      band('<div class="center"><h2 class="title">Data you can check.</h2><p class="lede" style="margin-top:10px">'+vcount+' programmes and '+scv+' scholarships carry facts read from official pages. The rest is marked as example, so you always know what to verify.</p></div>','grey')+
+      foot();
+  }
+
+  /* ================= FIND ================= */
+  var fuse=null,qCache={q:null,ids:null};
+  function qMatch(u){
+    var q=S.F.q;
+    if(window.Fuse){
+      if(qCache.q!==q){
+        if(!fuse)fuse=new Fuse(U,{keys:['n','city'],threshold:.35,ignoreLocation:true});
+        var s={};fuse.search(q).forEach(function(r){s[r.item.id]=1});qCache={q:q,ids:s};
+      }
+      return !!qCache.ids[u.id];
+    }
+    return (u.n+' '+u.city+' '+CC[u.c]).toLowerCase().indexOf(q.toLowerCase())>-1;
+  }
+  function filtered(){
+    var P=S.P,F=S.F,sel=F.c||P.ctry;
+    var list=U.filter(function(u){
+      if(u.f.indexOf(P.field)<0)return false;
+      if(sel.length&&sel.indexOf(u.c)<0)return false;
+      if(F.q&&!qMatch(u))return false;
+      if(F.tui!=='any'&&u.tl>+F.tui)return false;
+      if(F.dur!=='any'&&u.dur!==+F.dur)return false;
+      if(F.fund&&!fullFund(u))return false;
+      if(F.fit!=='any'&&fitOf(u)!==F.fit)return false;
+      return true;
+    }).map(function(u){return {u:u,k:fitOf(u)}});
+    list.sort(function(a,b){
+      if(S.sort==='tui')return costLow(a.u)-costLow(b.u);
+      if(S.sort==='dl')return daysTo(a.u.by)-daysTo(b.u.by);
+      if(S.sort==='acc')return a.u.sel-b.u.sel;
+      return FITR[a.k]-FITR[b.k];
+    });
+    return list;
+  }
+  function card(x){
+    var u=x.u,d=daysTo(u.by);
+    return '<div class="pc"><div><a class="t" href="#prog-'+u.id+'">'+esc(progName(u))+'</a><div class="mut" style="margin-top:4px">'+esc(u.n)+' · '+esc(u.city)+', '+esc(CC[u.c]||u.c)+'</div></div>'+
+      '<div class="row" style="flex-wrap:nowrap">'+ring(x.k).replace('class="ring"','class="ring" style="width:56px;height:56px"')+'<span class="pill '+FITC[x.k]+'">'+x.k+'</span></div>'+
+      '<div class="facts"><span>Tuition per year<b>'+(u.tt?'≈ '+rangeM(u.tl,u.th):rangeM(u.tl,u.th))+'</b></span><span>Duration<b>'+(u.dur/12)+' year'+(u.dur>12?'s':'')+'</b></span><span>Apply by<b>'+fmtDate(u.by)+'</b></span><span>Competition<b>'+comp(u)+'</b></span></div>'+
+      '<div class="acts">'+(fullFund(u)?'<span class="pill g">Full-funding route</span>':'<span class="pill">Partial or no funding</span>')+(d<75&&d>=0?'<span class="pill a">'+d+' days left</span>':'')+vb(u.v)+'<span class="sp"></span>'+
+      '<label class="cmpl"><input type="checkbox" data-cmp="'+u.id+'"'+(S.cmp.indexOf(u.id)>-1?' checked':'')+'> Compare</label>'+
+      '<button class="heart'+(inSl(u.id)?' on':'')+'" data-act="'+(inSl(u.id)?'unsl':'sl')+'" data-id="'+u.id+'" aria-label="'+(inSl(u.id)?'Remove from wishlist':'Add to wishlist')+'">'+(inSl(u.id)?'♥':'♡')+'</button></div></div>';
+  }
+  function vFind(){
+    var P=S.P,F=S.F,sel=F.c||P.ctry,list=filtered();
+    var cc=Object.keys(CC).map(function(c){return '<button class="cc'+(sel.indexOf(c)>-1?' on':'')+'" data-act="fcty" data-c="'+c+'">'+CC[c].replace(' (EU)','')+'</button>'}).join('');
+    var fit=['any','Target','Safe','Reach','Long shot'].map(function(k){return '<button class="cc'+(F.fit===k?' on':'')+'" data-act="ffit" data-k="'+k+'">'+(k==='any'?'Any fit':k)+'</button>'}).join('');
+    return band(ph('Programmes',list.length+' '+esc(FIELDS[P.field].toLowerCase())+' programmes','Each result shows your fit, first-year cost and funding.',sw())+
+      (P.level==='phd'?'<div class="callout am" style="margin-top:20px">For a PhD you usually apply to a supervisor, and funding comes through them. This list shows strong institutions. The full app would match supervisors and open positions.</div>':'')+
+      '<div class="fbar" style="margin-top:28px"><div class="fr"><div class="field"><label for="f-field">Field</label><select class="sel" id="f-field" data-fp="field">'+Object.keys(FIELDS).map(function(k){return '<option value="'+k+'"'+(P.field===k?' selected':'')+'>'+FIELDS[k]+'</option>'}).join('')+'</select></div>'+
+      '<div class="field"><label for="f-q">University or city</label><input class="in" id="f-q" data-fq placeholder="For example Munich" value="'+esc(F.q)+'"></div>'+
+      '<div class="field"><label for="f-tui">Tuition per year, up to</label><select class="sel" id="f-tui" data-ff="tui">'+[['any','Any'],['5000','$5,000'],['20000','$20,000'],['35000','$35,000']].map(function(o){return '<option value="'+o[0]+'"'+(F.tui===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div>'+
+      '<div class="field"><label for="f-dur">Duration</label><select class="sel" id="f-dur" data-ff="dur">'+[['any','Any'],['12','1 year'],['18','18 months'],['24','2 years']].map(function(o){return '<option value="'+o[0]+'"'+(F.dur===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div>'+
+      '<div class="field"><label for="f-sort">Sort by</label><select class="sel" id="f-sort" data-sort><option value="fit"'+(S.sort==='fit'?' selected':'')+'>Best fit</option><option value="tui"'+(S.sort==='tui'?' selected':'')+'>Lowest first-year cost</option><option value="dl"'+(S.sort==='dl'?' selected':'')+'>Deadline soonest</option><option value="acc"'+(S.sort==='acc'?' selected':'')+'>Least competitive</option></select></div></div>'+
+      '<div><div class="lab" style="margin-bottom:8px">Countries</div><div class="chips">'+cc+'</div></div>'+
+      '<div class="row"><div><div class="lab" style="margin-bottom:8px">Your fit</div><div class="chips">'+fit+'</div></div><span class="sp"></span><label class="cmpl"><input type="checkbox" data-ffund '+(F.fund?'checked':'')+'> Full-funding route available</label><button class="btn soft sm" data-act="freset">Reset</button></div></div>'+
+      '<div class="results">'+(list.length?list.map(card).join(''):'<div class="panel"><p class="mut">No programmes match these filters. Try more countries or reset the filters.</p></div>')+'</div>','grey')+foot();
+  }
+
+  /* ================= PROGRAMME ================= */
+  function vProg(id){
+    var u=uni(id);if(!u)return band('<div class="panel"><p>Programme not found.</p><a class="btn" href="#find">Back to programmes</a></div>');
+    var k=fitOf(u),d=daysTo(u.by),P=S.P,low=costLow(u),high=costHigh(u),gap=low-P.budget;
+    var fund=u.fund.map(function(fid){var s=sch(fid);if(!s)return '';var f=schFit(s);return '<a class="sch" href="#sch-'+s.id+'"><div class="row"><span class="pill '+(s.cov==='Full'?'g':'')+'">'+s.cov+' funding</span>'+(s.closed?'<span class="pill a">Closed this cycle</span>':'')+vb(s.v)+'</div><h5>'+esc(s.n)+'</h5><p>'+esc(s.dl)+'</p><span class="pill '+(f.k==='g'?'g':f.k==='a'?'a':f.k==='r'?'r':'')+'" style="align-self:flex-start">'+f.t+'</span></a>'}).join('')||'<div class="panel"><p class="mut">No dedicated scholarship is linked to this programme. Check the university\'s own funding page.</p></div>';
+    var fx=explainFit(u).map(function(r){return '<div class="ck"><span class="dot '+r[0]+'"></span><div><b>'+r[1]+'</b><div class="mut">'+esc(r[2])+'</div></div></div>'}).join('');
+    var req=u.id==='syd'?['A bachelor\'s degree with a credit average (65%) or equivalent','IELTS 6.5 overall, 6.0 in each band. TOEFL iBT 85. PTE 64.','Applications can close early when capacity is reached']:['A bachelor\'s degree with good grades (usually '+(u.minC>=2?'upper second class or equivalent':'lower second class or better')+')','IELTS '+u.ielts+' or an accepted equivalent','Statement of purpose, CV and references'];
+    var sec=function(id2,t){return '<span id="'+id2+'" class="sec"></span>'};
+    return '<div class="band" style="padding-bottom:20px"><div class="w">'+crumb([['Programmes','find'],[CC[u.c]||u.c,'country-'+u.c],[u.n]])+
+      '<div class="row" style="gap:8px;margin-bottom:12px">'+vb(u.v)+'<span class="pill">Competition: '+comp(u)+'</span></div>'+
+      '<h1 class="title">'+esc(progName(u))+'</h1><p class="lede" style="margin-top:6px">'+esc(u.n)+' · '+esc(u.city)+', '+esc(CC[u.c]||u.c)+'</p>'+
+      '<div class="row" style="margin-top:22px"><button class="btn" data-toast="Prototype: opens the university\'s official programme page in a new tab.">Visit programme website</button>'+(inSl(id)?'<button class="btn soft" data-act="unsl" data-id="'+id+'">♥ In wishlist</button>':'<button class="btn soft" data-act="sl" data-id="'+id+'">♡ Add to wishlist</button>')+'<button class="btn soft" data-act="cmpadd" data-id="'+id+'">Add to compare</button><span class="sp"></span>'+sw()+'</div>'+
+      '<div class="facts4"><div><div class="k">Tuition per year</div><div class="v">'+(u.tt?esc(u.tt):rangeM(u.tl,u.th))+'</div></div><div><div class="k">Duration</div><div class="v">'+(u.dur/12)+' year'+(u.dur>12?'s':'')+'</div></div><div><div class="k">Start</div><div class="v">'+u.start+'</div></div><div><div class="k">Apply by</div><div class="v">'+fmtDate(u.by)+'</div></div><div><div class="k">Your fit</div><div class="v" style="color:var(--'+(k==='Safe'?'ok':k==='Target'?'blue':k==='Reach'?'warn':'bad')+')">'+k+'</div></div></div>'+
+      (d>=0&&d<90?'<div class="callout am" style="margin-top:26px">Typical deadline in <b>'+d+' days</b>. Check the official page and start your documents now.</div>':'')+'</div></div>'+
+      '<div class="lnav"><div class="w"><a href="#prog-'+id+'" data-act="jump" data-t="s-fit">Your fit</a><a href="#prog-'+id+'" data-act="jump" data-t="s-req">Requirements</a><a href="#prog-'+id+'" data-act="jump" data-t="s-cost">Costs</a><a href="#prog-'+id+'" data-act="jump" data-t="s-fund">Funding</a><a href="#prog-'+id+'" data-act="jump" data-t="s-visa">Visa and work</a></div></div>'+
+      aboutBand(u)+(u.vnote?band('<div class="callout"><b>What we verified.</b> '+esc(u.vnote)+'<div class="small" style="margin-top:6px">Source: '+(safeUrl(u.url)?'<a href="'+esc(u.url)+'" target="_blank" rel="noopener" style="color:var(--link)">'+esc(u.src)+'</a>':esc(u.src))+' · read '+esc(u.verifiedOn||'20 Nov 2026')+'</div></div>','tight'):'')+
+      band('<div id="s-fit" class="sec"><h2 class="head2" style="margin-bottom:18px">Your fit</h2><div class="split"><div class="panel">'+fx+'</div><div class="panel" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">'+ring(k).replace('class="ring"','class="ring" style="width:120px;height:120px"')+'<div style="flex:1;min-width:200px"><h3>'+k+'</h3><p class="mut" style="margin-top:6px">Fit compares your profile with what this programme usually asks for. It is guidance, not a prediction. Universities rarely publish acceptance rates, so we show competition: <b>'+comp(u)+'</b>.</p></div></div></div></div>','grey')+
+      band('<div id="s-req" class="sec"><h2 class="head2" style="margin-bottom:18px">Admission requirements</h2><div class="panel"><div class="kv"><div class="k">Academic</div><div>'+esc(req[0])+'</div><div class="k">English</div><div>'+esc(req[1])+'</div><div class="k">Also needed</div><div>'+esc(req[2])+'</div><div class="k">Tip</div><div>'+esc(u.tip)+'</div></div></div></div>')+
+      band('<div id="s-cost" class="sec"><h2 class="head2" style="margin-bottom:18px">Costs and your budget</h2><div class="split"><div class="panel"><div class="kv"><div class="k">Tuition per year</div><div>'+(u.tt?esc(u.tt):rangeM(u.tl,u.th))+'</div><div class="k">Living costs</div><div>About '+money(u.lm)+' per month</div><div class="k">First year total</div><div><b>'+rangeM(low,high)+'</b></div></div></div>'+
+        '<div class="panel stack"><div class="field"><label for="bud">What can you pay per year (USD)?</label><select class="sel" id="bud" data-bud>'+[0,2000,5000,8000,12000,20000,30000].map(function(v){return '<option value="'+v+'"'+(P.budget===v?' selected':'')+'>$'+v.toLocaleString('en-US')+'</option>'}).join('')+'</select></div>'+(gap<=0?'<div class="verdict g" style="margin:0"><h3>Within your budget</h3><p>Your budget covers the low estimate.</p></div>':'<div class="verdict a" style="margin:0"><h3>Gap of about '+money(gap)+'</h3><p>'+(fullFund(u)?'A full award could close this gap. See funding below.':'You would need partial funding or savings for the rest.')+'</p></div>')+'</div></div></div>','grey')+
+      band('<div id="s-fund" class="sec"><h2 class="head2" style="margin-bottom:18px">Funding for this programme</h2><div class="grid2">'+fund+'</div></div>')+
+      band('<div id="s-visa" class="sec"><h2 class="head2" style="margin-bottom:18px">Visa and work after study</h2><div class="panel"><div class="kv"><div class="k">Work after study</div><div>'+esc(COUNTRY[u.c].work)+'</div><div class="k">Proof of funds</div><div>'+esc(COUNTRY[u.c].money)+'</div></div><div class="row" style="margin-top:18px"><a class="lnk" href="#country-'+u.c+'">Read the '+esc(CC[u.c]||u.c)+' guide</a><span class="sp"></span><button class="btn sm soft" data-act="req" data-id="visa">Visa interview prep <span class="cost">20 tokens</span></button><button class="btn sm soft" data-act="chat">Chat with a student <span class="cost">10 tokens</span></button></div></div></div>','grey')+foot();
+  }
+
+  function safeUrl(x){return typeof x==='string'&&/^https:\/\//.test(x)?x:''}
+  function aboutBand(u){
+    var e=ENR[u.id];if(!e)return '';
+    var bits=[];
+    if(e.established)bits.push(['Founded',e.established]);
+    if(e.students)bits.push(['Students',Number(e.students).toLocaleString('en-US')]);
+    if(e.worksCount)bits.push(['Research papers',Number(e.worksCount).toLocaleString('en-US')]);
+    if(e.citedBy)bits.push(['Citations',Number(e.citedBy).toLocaleString('en-US')]);
+    var links=[['Official website',safeUrl(e.website)],['Wikipedia',safeUrl(e.wikipedia)],['ROR record',safeUrl(e.ror)]].filter(function(l){return l[1]});
+    return band('<div class="panel"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="font-size:1.3rem">About the university</h2><span class="vb part">Open data</span></div>'+
+      (bits.length?'<div class="facts4" style="margin-top:12px">'+bits.map(function(b){return '<div><div class="k">'+b[0]+'</div><div class="v">'+esc(b[1])+'</div></div>'}).join('')+'</div>':'')+
+      '<div class="row" style="margin-top:18px;gap:22px">'+links.map(function(l){return '<a class="lnk" href="'+esc(l[1])+'" target="_blank" rel="noopener">'+l[0]+'</a>'}).join('')+'</div>'+
+      '<p class="small" style="margin-top:12px">Sources: Wikidata, ROR and OpenAlex (all CC0). Fetched '+esc(e.fetched||'')+'. Research counts are totals for the whole institution, not this programme.</p></div>','tight');
+  }
+
+  /* ================= COMPARE ================= */
+  function vCompare(){
+    var L=S.cmp.map(uni).filter(Boolean);
+    if(L.length<2)return band(ph('Tools','Compare programmes','Pick two or three programmes from the search results.')+'<div class="panel center" style="margin-top:30px;padding:44px"><p class="mut" style="margin-bottom:16px">'+L.length+' selected so far.</p><a class="btn" href="#find">Choose programmes</a></div>','grey');
+    function row(k,f){return '<tr><td class="k">'+k+'</td>'+L.map(function(u){return '<td>'+f(u)+'</td>'}).join('')+'</tr>'}
+    var hdr='<tr><th></th>'+L.map(function(u){return '<th style="color:var(--ink);font-size:1.05rem;letter-spacing:-.02em">'+esc(u.n)+'<div class="small" style="font-weight:400">'+esc(u.city)+'</div><button class="btn soft sm" style="margin-top:8px" data-act="cmprm" data-id="'+u.id+'">Remove</button></th>'}).join('')+'</tr>';
+    var best=L.slice().sort(function(a,b){return costLow(a)-costLow(b)})[0].id;
+    return band(ph('Tools','Compare programmes','The lowest first-year cost is marked.',sw())+
+      '<div class="tw" style="margin-top:28px"><table style="min-width:'+(170+L.length*230)+'px"><thead>'+hdr+'</thead><tbody>'+
+      row('Your fit',function(u){var k=fitOf(u);return '<span class="pill '+FITC[k]+'">'+k+'</span>'})+
+      row('Competition',function(u){return comp(u)})+
+      row('Tuition per year',function(u){return u.tt?esc(u.tt):rangeM(u.tl,u.th)})+
+      row('Living per month',function(u){return money(u.lm)})+
+      row('First year total',function(u){return '<b>'+rangeM(costLow(u),costHigh(u))+'</b>'+(u.id===best?' <span class="pill g">Lowest</span>':'')})+
+      row('Within your budget',function(u){return costLow(u)<=S.P.budget?'<span class="pill g">Yes</span>':'<span class="pill a">Gap '+money(costLow(u)-S.P.budget)+'</span>'})+
+      row('Duration',function(u){return u.dur/12+' year'+(u.dur>12?'s':'')})+
+      row('Start',function(u){return u.start})+
+      row('Apply by',function(u){return fmtDate(u.by)+' <span class="small">('+daysTo(u.by)+' days)</span>'})+
+      row('IELTS',function(u){return u.ielts})+
+      row('Funding routes',function(u){return u.fund.map(function(id){var s=sch(id);return s?'<div>'+esc(s.n.split(' (')[0])+' <span class="pill '+(s.cov==='Full'?'g':'')+'">'+s.cov+'</span></div>':''}).join('')||'<span class="mut">None linked</span>'})+
+      row('Data',function(u){return vb(u.v)})+
+      row('',function(u){return '<a class="lnk" href="#prog-'+u.id+'">Open</a>'})+
+      '</tbody></table></div><p class="small" style="margin-top:14px">Budget: $'+S.P.budget.toLocaleString('en-US')+' per year. Change it in your profile.</p>','grey')+foot();
+  }
+
+  /* ================= COUNTRIES ================= */
+  function vCountries(){
+    return band(ph('Countries','Where will you go?','Costs, funding and what happens after graduation.'))+
+      band('<div class="grid3">'+Object.keys(COUNTRY).map(function(k){var d=COUNTRY[k];return '<a class="cty" style="--h:'+d.h+';flex:none" href="#country-'+k+'"><span class="small" style="color:inherit;opacity:.7">'+d.len+'</span><h3>'+CC[k]+'</h3><p style="opacity:.8">'+d.b+'</p><div class="st"><span style="opacity:.7">Tuition</span><b>'+d.tui+'</b></div></a>'}).join('')+'</div>','grey')+foot();
+  }
+  function vCountry(c){
+    var d=COUNTRY[c];if(!d)return band('<div class="panel"><p>Country not found.</p><a class="btn" href="#countries">Back</a></div>');
+    var progs=U.filter(function(u){return u.c===c}),ids={};progs.forEach(function(u){u.fund.forEach(function(f){ids[f]=1})});
+    var funds=Object.keys(ids).map(sch).filter(Boolean);
+    return band(crumb([['Countries','countries'],[CC[c]]])+'<div class="row" style="gap:8px;margin-bottom:12px">'+vb(d.v)+'</div><h1 class="title">Study in '+CC[c]+'.</h1><p class="lede" style="margin-top:8px">'+d.b+'</p>'+
+      '<div class="facts4"><div><div class="k">Masters length</div><div class="v">'+d.len+'</div></div><div><div class="k">Tuition per year</div><div class="v">'+d.tui+'</div></div><div><div class="k">Living costs</div><div class="v" style="font-size:1.15rem">'+d.liv+'</div></div><div><div class="k">Main intake</div><div class="v">'+d.intake+'</div></div></div>')+
+      band('<div class="split"><div class="panel"><h3 style="margin-bottom:10px">Good for</h3><ul style="margin:0;padding-left:20px">'+d.good.map(function(g){return '<li>'+g+'</li>'}).join('')+'</ul></div><div class="panel"><h3 style="margin-bottom:10px">Watch out for</h3><ul style="margin:0;padding-left:20px">'+d.watch.map(function(g){return '<li>'+g+'</li>'}).join('')+'</ul></div></div>'+
+        '<div class="panel" style="margin-top:16px"><div class="kv"><div class="k">Work after study</div><div>'+esc(d.work)+'</div><div class="k">Proof of funds</div><div>'+esc(d.money)+'</div>'+(d.src?'<div class="k">Source</div><div class="mut">'+esc(d.src)+', read 20 Nov 2026</div>':'')+'</div></div>','grey')+
+      band('<h2 class="head2" style="margin-bottom:18px">Funding in '+CC[c]+'</h2><div class="grid2">'+(funds.map(function(s){var f=schFit(s);return '<a class="sch" href="#sch-'+s.id+'"><div class="row"><span class="pill '+(s.cov==='Full'?'g':'')+'">'+s.cov+' funding</span>'+(s.closed?'<span class="pill a">Closed this cycle</span>':'')+vb(s.v)+'</div><h5>'+esc(s.n)+'</h5><p>'+esc(s.dl)+'</p><span class="pill '+(f.k==='g'?'g':f.k==='a'?'a':f.k==='r'?'r':'')+'" style="align-self:flex-start">'+f.t+'</span></a>'}).join('')||'<div class="panel"><p class="mut">No dedicated scholarship linked here yet.</p></div>')+'</div>')+
+      band('<h2 class="head2" style="margin-bottom:18px">Example programmes</h2><div class="results" style="margin-top:0">'+progs.map(function(u){return '<a class="panel" href="#prog-'+u.id+'" style="text-decoration:none;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><b style="font-size:1.1rem;letter-spacing:-.02em">'+esc(u.n)+'</b><div class="mut">'+esc(u.city)+' · '+rangeM(u.tl,u.th)+' per year</div></div><span class="pill '+FITC[fitOf(u)]+'">'+fitOf(u)+'</span></a>'}).join('')+'</div><div style="margin-top:24px"><button class="btn" data-act="chat">Chat with a student in '+esc(CC[c])+' <span class="cost">10 tokens</span></button></div>','grey')+foot();
+  }
+
+  /* ================= SCHOLARSHIPS ================= */
+  function vSchol(){
+    var F=S.sc;
+    var list=SCH.filter(function(s){return (F.c==='all'||s.c===F.c||s.c==='Global')&&(F.t==='all'||s.t===F.t)&&(!F.full||s.cov==='Full')&&s.lv.indexOf(S.P.level)>-1&&(!F.open||!s.closed)})
+      .map(function(s){return {s:s,f:schFit(s)}}).sort(function(a,b){var o={g:0,a:1,n:2,r:3};return (o[a.f.k]-o[b.f.k])||((a.s.closed?1:0)-(b.s.closed?1:0))});
+    var cs=['all'].concat(Object.keys(CC)).map(function(c){return '<button class="cc'+(F.c===c?' on':'')+'" data-act="sc" data-c="'+c+'">'+(c==='all'?'All destinations':CC[c].replace(' (EU)',''))+'</button>'}).join('');
+    var ts=['all','Government','University','Assistantship','Fellowship','Foundation','EU'].map(function(t){return '<button class="cc'+(F.t===t?' on':'')+'" data-act="st" data-t="'+t+'">'+(t==='all'?'All types':t)+'</button>'}).join('');
+    return band(ph('Scholarships',SCH.length+' ways to fund it.','Matched to your citizenship ('+esc(S.P.nat)+'), age, level and experience.'))+
+      band('<div class="fbar"><div><div class="lab" style="margin-bottom:8px">Where will you study?</div><div class="chips">'+cs+'</div></div><div><div class="lab" style="margin-bottom:8px">Type</div><div class="chips">'+ts+'</div></div><div class="row"><label class="cmpl"><input type="checkbox" data-sfull '+(F.full?'checked':'')+'> Full funding only</label><label class="cmpl"><input type="checkbox" data-sopen '+(F.open?'checked':'')+'> Hide closed this cycle</label></div></div>'+
+        '<div class="grid2" style="margin-top:20px">'+(list.length?list.map(function(x){var s=x.s,f=x.f;return '<a class="sch" href="#sch-'+s.id+'"><div class="row"><span class="pill">'+esc(CC[s.c]||s.c)+' · '+s.t+'</span>'+(s.closed?'<span class="pill a">Closed this cycle</span>':'')+vb(s.v)+'</div><h5>'+esc(s.n)+'</h5><p>'+esc(s.note)+'</p><div class="row" style="margin-top:auto"><span class="pill '+(f.k==='g'?'g':f.k==='a'?'a':f.k==='r'?'r':'')+'">'+f.t+'</span><span class="pill '+(s.cov==='Full'?'g':'')+'">'+s.cov+' funding</span></div></a>'}).join(''):'<div class="panel"><p class="mut">No scholarships match these filters.</p></div>')+'</div>','grey')+
+      band('<h2 class="head2" style="margin-bottom:18px">How to apply for a scholarship</h2><div class="grid3"><div class="panel flat"><b>1. Check eligibility</b><p class="mut" style="margin-top:6px">Nationality, age, experience and return-home rules.</p></div><div class="panel flat"><b>2. Plan the deadline</b><p class="mut" style="margin-top:6px">Many close before admission deadlines.</p></div><div class="panel flat"><b>3. Write the essay</b><p class="mut" style="margin-top:6px">Tell a specific story and link it to the funder\'s goals.</p></div><div class="panel flat"><b>4. Prepare for interview</b><p class="mut" style="margin-top:6px">Government awards often interview shortlisted candidates.</p></div></div><div class="row" style="margin-top:24px"><a class="lnk" href="#art-a2">Read the scholarship guide</a><button class="btn sm" data-act="req" data-id="sch">Essay review <span class="cost">25 tokens</span></button></div>')+foot();
+  }
+  function vSchDetail(id){
+    var s=sch(id);if(!s)return band('<div class="panel"><p>Scholarship not found.</p><a class="btn" href="#scholarships">Back</a></div>');
+    var f=schFit(s),progs=U.filter(function(u){return u.fund.indexOf(id)>-1});
+    return band(crumb([['Scholarships','scholarships'],[s.n]])+'<div class="row" style="gap:8px;margin-bottom:12px"><span class="pill">'+esc(CC[s.c]||s.c)+'</span><span class="pill">'+s.t+'</span>'+vb(s.v)+(s.closed?'<span class="pill a">Closed this cycle</span>':'')+'</div><h1 class="title">'+esc(s.n)+'</h1>'+
+      '<div class="verdict '+(f.k==='g'?'g':f.k==='a'?'a':f.k==='r'?'r':'a')+'" style="margin-top:22px;max-width:560px"><h3>'+f.t+'</h3><p>Based on your profile: '+esc(S.P.nat)+', age '+S.P.age+', '+(S.P.level==='phd'?'PhD':'Masters')+', '+S.P.exp+' years of experience.</p></div>'+
+      '<div class="facts4"><div><div class="k">Covers</div><div class="v">'+s.cov+' funding</div></div><div><div class="k">Level</div><div class="v">'+s.lv.map(function(l){return l==='phd'?'PhD':'Masters'}).join(' and ')+'</div></div><div><div class="k">Experience</div><div class="v">'+(s.minExp?s.minExp+'+ years':'Not required')+'</div></div></div>')+
+      band('<div class="split"><div class="stack"><div><h2 class="head2" style="margin-bottom:10px">What it covers</h2><p class="mut" style="font-size:1.1rem">'+esc(s.note)+'</p></div><div><h2 class="head2" style="margin-bottom:10px">Who can apply</h2><p class="mut" style="font-size:1.1rem">'+esc(s.el)+'</p></div><div><h2 class="head2" style="margin-bottom:10px">Deadline</h2><p class="mut" style="font-size:1.1rem">'+esc(s.dl)+'</p></div></div>'+
+        '<div class="stack"><div class="panel"><h3 style="margin-bottom:8px">How to apply</h3><ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px"><li>Read the official eligibility rules.</li><li>Prepare essays and ask your referees.</li><li>Apply for admission if the scholarship requires it.</li><li>Submit before the deadline.</li><li>Prepare for an interview if shortlisted.</li></ol></div><div class="callout"><b>Tip.</b> '+esc(s.tip)+'</div>'+(s.src?'<p class="small">Source: '+(safeUrl(s.url)?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener" style="color:var(--link)">'+esc(s.src)+'</a>':esc(s.src))+(s.v==='ver'?', read '+esc(s.verifiedOn||'20 Nov 2026'):'')+'</p>':'<p class="small">Not yet verified against an official page.</p>')+'</div></div>','grey')+
+      band('<h2 class="head2" style="margin-bottom:18px">Programmes linked to this award</h2><div class="results" style="margin-top:0">'+(progs.length?progs.map(function(u){return '<a class="panel" href="#prog-'+u.id+'" style="text-decoration:none;display:flex;justify-content:space-between;gap:12px;align-items:center"><b style="font-size:1.1rem;letter-spacing:-.02em">'+esc(u.n)+'</b><span class="pill '+FITC[fitOf(u)]+'">'+fitOf(u)+'</span></a>'}).join(''):'<div class="panel"><p class="mut">Applies across partner programmes. Check the official page.</p></div>')+'</div>'+
+        '<div style="margin-top:34px"><h2 class="head2" style="margin-bottom:6px">Questions</h2><details class="q"><summary>Does it count as proof of funds for my visa?</summary><p>It depends on the funder and the country. Check both the scholarship terms and the visa rules.</p></details><details class="q"><summary>Do I have to repay it?</summary><p>Most scholarships are grants, but some, like the Aga Khan programme, are part loan. Others require you to return home or work for a period. Read the terms.</p></details><details class="q"><summary>Is it taxed?</summary><p>Rules differ by country and award. Check with the funder.</p></details></div>'+
+        '<div class="row" style="margin-top:26px"><button class="btn" data-act="req" data-id="sch">Get essay review <span class="cost">25 tokens</span></button><button class="btn soft" data-act="req" data-id="mock">Mock interview <span class="cost">30 tokens</span></button></div>')+foot();
+  }
+
+  /* ================= ADVICE ================= */
+  function vAdvice(){
+    return band(ph('Advice','Guides for applying abroad.','Step by step, reviewed and dated so you know they are current.'))+
+      band('<div class="grid2">'+ARTS.map(function(a){return '<a class="tile" href="#art-'+a.id+'" style="min-height:220px"><span class="pill b" style="align-self:flex-start">'+a.tag+'</span><h3>'+esc(a.t)+'</h3><span class="small" style="margin-top:auto">'+a.min+' min read · Reviewed 20 Nov 2026</span></a>'}).join('')+'</div>','grey')+foot();
+  }
+  function vArt(id){
+    var a=ARTS.filter(function(x){return x.id===id})[0];if(!a)return band('<div class="panel"><p>Guide not found.</p><a class="btn" href="#advice">Back</a></div>');
+    var more=ARTS.filter(function(x){return x.id!==id}).slice(0,3);
+    return band(crumb([['Advice','advice'],[a.tag]])+'<div class="art"><span class="pill b">'+a.tag+'</span><h1 class="title" style="margin:14px 0 10px">'+esc(a.t)+'</h1><p class="small">'+a.min+' min read · Reviewed 20 Nov 2026 · Example content</p>'+
+      '<div class="callout" style="margin:24px 0"><b>Key takeaways</b><ul style="margin:8px 0 0;padding-left:20px">'+a.sum.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>'+
+      a.sec.map(function(s){return '<h2>'+esc(s[0])+'</h2><p>'+esc(s[1])+'</p>'}).join('')+
+      '<div class="panel flat" style="margin-top:30px"><b>Your next step</b><div class="row" style="margin-top:10px">'+a.next.map(function(n){return '<a class="btn sm" href="#'+n[1]+'">'+esc(n[0])+'</a>'}).join('')+'</div></div></div>')+
+      band('<h2 class="head2" style="margin-bottom:18px">You may also like</h2><div class="grid3">'+more.map(function(m){return '<a class="tile" href="#art-'+m.id+'" style="min-height:160px"><h3 style="font-size:1.25rem">'+esc(m.t)+'</h3><span class="small" style="margin-top:auto">'+m.min+' min read</span></a>'}).join('')+'</div>','grey')+foot();
+  }
+
+  /* ================= TOOLS ================= */
+  function vTools(){
+    var t=[['Fit profile','Tell us your citizenship, degree, English test and experience. Every programme shows Safe, Target, Reach or Long shot.','profile','Free'],['Compare programmes','Costs, deadlines, requirements and funding side by side.','compare','Free'],['Funding finder','Scholarships matched to your citizenship and age.','scholarships','Free'],['SOP clinic','Paste a draft for an instant quality check.','sop','Free quick check'],['Application plan','Documents checklist and a timeline to your intake.','plan','Free'],['Ask Passage','Quick answers on cost, deadlines and funding.','home','Free']];
+    return band(ph('Tools','Everything you need to apply well.'))+band('<div class="grid2">'+t.map(function(x){return '<a class="tile" href="#'+x[2]+'" style="min-height:200px"><div class="row" style="justify-content:space-between"><h3 style="font-size:1.4rem">'+x[0]+'</h3><span class="free">'+x[3]+'</span></div><p>'+x[1]+'</p><span class="lnk foot">Open</span></a>'}).join('')+'</div>','grey')+foot();
+  }
+
+  /* ================= SOP ================= */
+  var CLICHE=['since childhood','from a young age','passionate about','passion for','ever since i was','in today\'s world','dream of','team player','hard-working','hardworking'];
+  function sopCheck(txt){
+    var t=txt.trim(),words=t?t.split(/\s+/).length:0;
+    var paras=t?t.split(/\n\s*\n/).filter(function(p){return p.trim()}).length:0;
+    var low=t.toLowerCase(),found=CLICHE.filter(function(c){return low.indexOf(c)>-1});
+    var nums=(t.match(/\d+/g)||[]).length,ev=(low.match(/thesis|project|research|internship|dissertation|laborator|supervis|designed|built|led /g)||[]).length;
+    var fit=(low.match(/professor|faculty|lab\b|module|course|programme|program\b|department/g)||[]).length;
+    var goal=/goal|plan|after my|return|career|contribute|impact/.test(low);
+    var op=low.slice(0,220),opCl=CLICHE.some(function(c){return op.indexOf(c)>-1});
+    var chk=[];
+    chk.push(words<350?['r','Length','About '+words+' words. Most programmes expect 500 to 1,000. Add detail about your experience and goals.']:words<500?['a','Length',words+' words. Close, but aim for 500 to 1,000 unless the programme sets a limit.']:words<=1000?['g','Length',words+' words, a good range.']:['a','Length',words+' words. Check the limit and trim repetition.']);
+    chk.push(opCl?['a','Opening','Your opening sounds generic. Start with a specific moment, project or problem you worked on.']:['g','Opening','The opening is not a cliche. Make sure it grabs attention in the first line.']);
+    chk.push(nums+ev>=5?['g','Evidence','You give concrete projects and numbers. Keep it specific.']:nums+ev>=2?['a','Evidence','Some evidence, but add more numbers, results and your exact role.']:['r','Evidence','Almost no concrete evidence. Add projects, results and numbers.']);
+    chk.push(fit>=3?['g','Fit with the programme','You mention programme details. Name modules, labs or professors for each school.']:['a','Fit with the programme','Mention specific modules, labs or professors so it does not read like a template.']);
+    chk.push(goal?['g','Goals','You describe what you plan to do afterwards.']:['a','Goals','Say clearly what you will do after the degree and why it matters.']);
+    chk.push(paras>=4?['g','Structure',paras+' paragraphs, a clear structure.']:paras>=2?['a','Structure','Only '+paras+' paragraphs. Aim for an opening, background, fit, and goals.']:['r','Structure','One block of text. Break it into clear paragraphs.']);
+    return {chk:chk,found:found,words:words,t:t};
+  }
+  function sopFree(){
+    var r=sopCheck(S.sop),sc=r.chk.reduce(function(a,c){return a+(c[0]==='g'?2:c[0]==='a'?1:0)},0),pct=Math.round(sc/(r.chk.length*2)*100),v=pct>=75?'g':pct>=45?'a':'r';
+    return '<div class="verdict '+v+'"><h3>Quick check: '+pct+'%</h3><p>'+(v==='g'?'A solid base. An expert can sharpen the details.':v==='a'?'Good bones, with clear gaps to fix.':'It needs more work before you send it anywhere.')+'</p></div>'+
+      r.chk.map(function(c){return '<div class="ck"><span class="dot '+c[0]+'"></span><div><b>'+c[1]+'</b><div class="mut">'+esc(c[2])+'</div></div></div>'}).join('')+
+      (r.found.length?'<div class="ck"><span class="dot a"></span><div><b>Phrases that sound generic</b><div class="mut">'+r.found.map(function(f){return '"'+esc(f)+'"'}).join(', ')+'</div></div></div>':'');
+  }
+  function sopDeep(){
+    var r=sopCheck(S.sop),sents=r.t.split(/(?<=[.!?])\s+/).filter(function(s){return s}),longS=sents.filter(function(s){return s.split(/\s+/).length>35}),iStart=sents.filter(function(s){return /^I\b/.test(s)}).length,first=sents[0]||'';
+    return '<div class="report"><div class="row" style="justify-content:space-between"><h2>Expert review (demo)</h2><span class="pill g">Delivered</span></div><p style="margin-top:10px"><b>Opening line:</b> "'+esc(first.slice(0,140))+(first.length>140?'...':'')+'"</p>'+
+      '<p class="mut" style="margin-top:4px">'+(r.found.length?'Replace the general claim with a specific story. For example, start with the drainage design that served 3,000 residents and what went wrong or right.':'Check that this line shows who you are and why this field, not only what you did.')+'</p>'+
+      '<p style="margin-top:14px"><b>Top edits</b></p><ul>'+(r.found.length?'<li>Cut generic phrases ('+r.found.map(function(f){return '"'+esc(f)+'"'}).join(', ')+') and use one concrete example instead.</li>':'')+(longS.length?'<li>'+longS.length+' sentence'+(longS.length>1?'s are':' is')+' longer than 35 words. Split them.</li>':'')+(iStart>=3?'<li>'+iStart+' sentences start with "I". Vary the openings.</li>':'')+'<li>Tie each school version to one named professor, lab or module.</li><li>End with a specific plan: what you will do on return and who it will help.</li></ul><p class="small" style="margin-top:12px">Demo output. In the full app a human editor writes line-level comments within 48 hours.</p></div>';
+  }
+  function vSop(){
+    return band(ph('Tools','SOP clinic.','Paste your draft. The quick check is free and updates as you type.'))+
+      band('<div class="split"><div class="panel stack"><div class="field"><label for="sop">Your draft (an example is loaded)</label><textarea class="ta" id="sop" style="min-height:340px">'+esc(S.sop)+'</textarea></div><div class="row"><span class="small" id="wc"></span><span class="sp"></span><button class="btn" data-act="sopfull">Full expert review <span class="cost">25 tokens</span></button></div></div>'+
+      '<div><div class="panel" id="sopres">'+sopFree()+'</div><div id="sopfull" style="margin-top:16px">'+(S.sopFull||'')+'</div></div></div>','grey')+foot();
+  }
+
+  /* ================= HELP ================= */
+  function vHelp(){
+    var my=S.reqs.length?'<div class="panel" style="margin-bottom:20px"><h2 style="margin-bottom:6px;font-size:1.2rem">Your requests</h2><div class="hist">'+S.reqs.map(function(r){return '<div><span><b>'+esc(r.n)+'</b><br><span class="small">'+esc(r.tg)+' · '+esc(r.when)+'</span></span><span class="pill a">Queued · '+esc(r.eta)+'</span></div>'}).join('')+'</div></div>':'';
+    return band(ph('Expert help','People who have done it.','Tools in Passage are free. Tokens pay for expert time.'))+
+      band(my+'<div class="grid2">'+SVC.map(function(s){return '<div class="svc"><div class="row" style="justify-content:space-between;align-items:flex-start"><h5>'+esc(s.n)+'</h5><span class="cost">'+s.tk+' tokens</span></div><p class="mut">'+esc(s.d)+'</p><div class="row" style="justify-content:space-between;margin-top:auto"><span class="small">'+esc(s.eta)+'</span><button class="btn sm" data-act="req" data-id="'+s.id+'">Request</button></div></div>'}).join('')+'</div><p class="small" style="margin-top:16px">Example services and prices. In the full app every editor and mentor is vetted and all work is confidential.</p>','grey')+foot();
+  }
+  function openReq(id,pre){
+    var s=SVC.filter(function(x){return x.id===id})[0];
+    var opts=['General (not for one school)'].concat(S.sl.map(function(x){return uni(x.id).n}));
+    if(id==='chat')opts=Object.keys(CC).filter(function(c){return c!=='EU'}).map(function(c){return 'A student in '+CC[c]});
+    $('modal').innerHTML='<div class="sheet"><div class="row" style="justify-content:space-between"><h2 style="font-size:1.5rem">'+esc(s.n)+'</h2><button class="btn soft sm" data-act="close">Close</button></div><p class="mut">'+s.tk+' tokens · '+esc(s.eta)+'</p>'+
+      '<div class="field"><label for="rt">'+(id==='chat'?'Who do you want to talk to?':'What is this for?')+'</label><select class="sel" id="rt">'+opts.map(function(o){return '<option'+(pre&&o.indexOf(CC[pre]||pre)>-1?' selected':'')+'>'+esc(o)+'</option>'}).join('')+'</select></div>'+
+      (s.doc?'<div class="field"><label for="rd">Paste your text</label><textarea class="ta" id="rd" style="min-height:120px">'+(s.id==='sop'?esc(S.sop):'')+'</textarea></div>':'<div class="field"><label for="rd">What do you want help with?</label><textarea class="ta" id="rd" style="min-height:100px" placeholder="For example: which of my shortlisted schools should I prioritise?"></textarea></div>')+
+      '<div id="re" class="err" hidden></div><div class="row"><button class="btn" data-act="reqok" data-id="'+id+'">Confirm and pay '+s.tk+' tokens</button><span class="small">You have '+S.tokens+' tokens.</span></div></div>';
+    $('modal').hidden=false;
+  }
+  function reqOk(id){
+    var s=SVC.filter(function(x){return x.id===id})[0],e=$('re');
+    if(!$('rd').value.trim()){e.textContent=s.doc?'Paste your text so the editor can work on it.':'Tell us what you want help with.';e.hidden=false;return}
+    if(S.tokens<s.tk){e.innerHTML='You need '+(s.tk-S.tokens)+' more tokens. <a href="#wallet" data-act="close">Top up in Wallet</a>';e.hidden=false;return}
+    spend(s.tk,s.n);S.reqs.unshift({n:s.n,tg:$('rt').value,when:'20 Nov 2026',eta:s.eta});
+    closeModal();toast('Request sent (demo). An expert would reply within '+s.eta.toLowerCase()+'.');
+    if(route().r==='help')render(true);
+  }
+  function closeModal(){$('modal').hidden=true}
+
+  /* ================= MY PASSAGE ================= */
+  function opt(arr,cur,fn){return arr.map(function(x){var v=fn?fn(x):x;return '<option value="'+v[0]+'"'+(String(cur)===String(v[0])?' selected':'')+'>'+v[1]+'</option>'}).join('')}
+  function vProfile(){
+    var P=S.P,r=readiness();
+    return band(ph('My Passage','Your profile.','Pre-filled with an example student. Change anything and every page updates.')+subnav('profile').replace('<nav','<nav style="margin-top:26px"')+
+      '<div class="panel stack"><div class="grid2">'+
+      '<div class="field"><label for="p-nat">Citizenship</label><select class="sel" id="p-nat" data-p="nat">'+Object.keys(NAT).map(function(n){return '<option'+(P.nat===n?' selected':'')+'>'+n+'</option>'}).join('')+'</select></div>'+
+      '<div class="field"><label for="p-age">Age</label><select class="sel" id="p-age" data-p="age">'+opt([21,22,23,24,25,26,27,28,29,30,32,34,36,38,40,45],P.age,function(x){return [x,x]})+'</select></div>'+
+      '<div class="field"><label for="p-field">Field of study</label><select class="sel" id="p-field" data-p="field">'+opt(Object.keys(FIELDS),P.field,function(k){return [k,FIELDS[k]]})+'</select></div>'+
+      '<div class="field"><label for="p-level">Level</label><select class="sel" id="p-level" data-p="level"><option value="masters"'+(P.level==='masters'?' selected':'')+'>Masters</option><option value="phd"'+(P.level==='phd'?' selected':'')+'>PhD</option></select></div>'+
+      '<div class="field"><label for="p-cls">Degree classification</label><select class="sel" id="p-cls" data-p="cls">'+opt(CLASSES,P.cls,function(c){return [c[0],c[1]]})+'</select></div>'+
+      '<div class="field"><label for="p-ielts">English test (IELTS overall)</label><select class="sel" id="p-ielts" data-p="ielts">'+opt(IELTS,P.ielts,function(c){return [c[0],c[1]]})+'</select></div>'+
+      '<div class="field"><label for="p-exp">Years of work experience</label><select class="sel" id="p-exp" data-p="exp">'+opt([0,1,2,3,4,5],P.exp,function(n){return [n,n+(n===5?' or more':'')]})+'</select></div>'+
+      '<div class="field"><label for="p-res">Research or publications</label><select class="sel" id="p-res" data-p="res"><option value="0"'+(!P.res?' selected':'')+'>None yet</option><option value="1"'+(P.res?' selected':'')+'>Yes, a thesis, paper or project</option></select></div>'+
+      '<div class="field"><label for="p-fund">Funding need</label><select class="sel" id="p-fund" data-p="fund">'+opt(Object.keys(FUNDN),P.fund,function(k){return [k,FUNDN[k]]})+'</select></div>'+
+      '<div class="field"><label for="p-budget">Budget per year (USD)</label><select class="sel" id="p-budget" data-p="budget">'+opt([0,2000,5000,8000,12000,20000,30000],P.budget,function(v){return [v,'$'+v.toLocaleString('en-US')]})+'</select></div>'+
+      '<div class="field"><label for="p-intake">Target intake</label><select class="sel" id="p-intake" data-p="intake">'+opt(INTAKES,P.intake,function(k){return [k,k]})+'</select></div></div>'+
+      '<div><div class="lab" style="margin-bottom:8px">Destinations you would consider</div><div class="chips">'+Object.keys(CC).map(function(c){return '<button class="cc'+(P.ctry.indexOf(c)>-1?' on':'')+'" data-act="ctry" data-c="'+c+'">'+CC[c].replace(' (EU)','')+'</button>'}).join('')+'</div></div>'+
+      '<div class="row"><a class="btn" href="#find">See matching programmes</a><span class="small">Exchange rates are examples.</span></div></div>')+
+      band('<div class="split"><div class="panel"><div class="row" style="justify-content:space-between;margin-bottom:14px"><h2 style="font-size:1.3rem">Readiness</h2><b class="num" style="font-size:1.3rem">'+r.total+' / 100</b></div><div class="stack" style="gap:12px">'+r.parts.map(function(p){return '<div class="bl"><span>'+p[0]+'</span><div class="meter"><i style="width:'+(p[1]/p[2]*100)+'%"></i></div><span class="num mut">'+p[1]+'/'+p[2]+'</span></div>'}).join('')+'</div></div>'+
+        '<div class="stack"><button class="btn" data-act="report">Full application strategy <span class="cost">10 tokens</span></button>'+(S.report?'<div class="report"><div class="row" style="justify-content:space-between"><h2 style="font-size:1.3rem">Your application strategy</h2><span class="pill g">Generated</span></div>'+S.report+'<p class="small" style="margin-top:12px">Prototype: built from rules and your profile.</p></div>':'<p class="mut">A balanced list of reach, target and safe programmes, plus the funding to pursue.</p>')+'</div></div>','grey')+foot();
+  }
+  function vWishlist(){
+    var rows=S.sl.map(function(x){var u=uni(x.id),d=daysTo(u.by);return '<tr><td><a href="#prog-'+u.id+'" style="text-decoration:none"><b>'+esc(u.n)+'</b></a><div class="small">'+esc(CC[u.c])+' · apply by '+fmtDate(u.by)+(d>=0&&d<75?' · <span style="color:var(--warn);font-weight:600">'+d+' days left</span>':'')+'</div></td><td><span class="pill '+FITC[fitOf(u)]+'">'+fitOf(u)+'</span></td><td class="num">'+money(costLow(u))+'</td><td><select class="sel" style="min-height:38px;padding:6px 10px" data-sl="'+x.id+'">'+['Researching','Preparing','Submitted','Offer received'].map(function(s){return '<option'+(x.st===s?' selected':'')+'>'+s+'</option>'}).join('')+'</select></td><td><button class="btn soft sm" data-act="unsl" data-id="'+x.id+'">Remove</button></td></tr>'}).join('');
+    return band(ph('My Passage','Wishlist.','Programmes you are considering, with fit, cost and status.',sw())+subnav('wishlist').replace('<nav','<nav style="margin-top:26px"')+
+      (S.sl.length?'<div class="tw"><table style="min-width:680px"><thead><tr><th>Programme</th><th>Fit</th><th>First year (low)</th><th>Status</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="panel center" style="padding:40px"><p class="mut" style="margin-bottom:14px">Nothing here yet. Tap the heart on any programme to save it.</p><a class="btn" href="#find">Browse programmes</a></div>')+
+      (S.sl.length?'<div class="row" style="margin-top:18px"><a class="btn" href="#find">Add programmes</a></div>':''),'grey')+foot();
+  }
+  function vPlan(){
+    var docs=DOCS.map(function(d,i){var v=+S.docs[d]||0;return '<tr><td>'+d+'</td><td><select class="sel" style="min-height:38px;padding:6px 10px" data-doc="'+i+'"><option value="0"'+(v===0?' selected':'')+'>Not started</option><option value="1"'+(v===1?' selected':'')+'>In progress</option><option value="2"'+(v===2?' selected':'')+'>Done</option></select></td></tr>'}).join('');
+    var tl=TL.map(function(t){return '<label><input type="checkbox" data-tl="'+t.id+'"'+(S.tl[t.id]?' checked':'')+'><span class="'+(S.tl[t.id]?'x':'')+'">'+esc(t.t)+'</span><span class="w2">'+t.w+'</span></label>'}).join('');
+    return band(ph('My Passage','Application plan.','Timeline shown for an Autumn 2027 start.')+subnav('plan').replace('<nav','<nav style="margin-top:26px"')+
+      '<div class="split"><div class="panel"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="font-size:1.3rem">Documents</h2><span class="pill b" id="docp">'+Math.round(docProg()*100)+'% ready</span></div><table style="min-width:300px"><tbody>'+docs+'</tbody></table></div>'+
+      '<div class="panel"><h2 style="font-size:1.3rem;margin-bottom:8px">Timeline</h2><div class="tl">'+tl+'</div></div></div>','grey')+foot();
+  }
+  function vWallet(){
+    var packs=[[20,'$2'],[60,'$5'],[150,'$10']];
+    return band(ph('My Passage','Tokens.','Free tools stay free. Tokens pay for expert time.')+subnav('wallet').replace('<nav','<nav style="margin-top:26px"')+
+      '<div class="split"><div class="panel stack"><div><div class="small">Your balance</div><div class="bal" id="bal">'+S.tokens+'</div></div><div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">'+packs.map(function(p,i){return '<div class="pack'+(i===1?' best':'')+'"><div class="t">'+p[0]+'</div><div class="small">tokens</div><b>'+p[1]+(i===1?' · best value':'')+'</b><button class="btn sm" data-act="buy" data-t="'+p[0]+'" data-p="'+p[1]+'">Buy</button></div>'}).join('')+'</div><p class="small">Example prices. Payment is simulated. The live app would support card and mobile money.</p></div>'+
+      '<div class="stack"><div class="panel"><h2 style="font-size:1.3rem;margin-bottom:8px">Free and paid</h2><div class="hist"><div><span>Programme search, fit and compare</span><span class="free">Free</span></div><div><span>Scholarship finder and guides</span><span class="free">Free</span></div><div><span>Plan, documents and timeline</span><span class="free">Free</span></div><div><span>SOP quick check</span><span class="free">Free</span></div><div><span>Full application strategy</span><span class="cost">10 tokens</span></div><div><span>Expert reviews, chats and sessions</span><span class="cost">5 to 30 tokens</span></div></div></div>'+
+      '<div class="panel"><h2 style="font-size:1.3rem;margin-bottom:6px">For universities and sponsors</h2><p class="mut">A university career office, alumni group or sponsor can buy tokens in bulk and give them to students.</p></div></div></div>'+
+      '<div class="panel" style="margin-top:20px"><h2 style="font-size:1.3rem;margin-bottom:6px">History</h2><div class="hist" id="hist">'+histH()+'</div></div>','grey')+foot();
+  }
+  function histH(){return S.hist.map(function(h){return '<div><span>'+esc(h.d)+'</span><b style="color:'+(h.a>0?'var(--ok)':'inherit')+'">'+(h.a>0?'+':'')+h.a+'</b></div>'}).join('')}
+  function buildReport(){
+    var P=S.P,cs=candidates().map(function(u){return {u:u,k:fitOf(u)}});
+    function pick(k,n){return cs.filter(function(c){return c.k===k}).slice(0,n)}
+    var reach=pick('Reach',2).concat(pick('Long shot',1)).slice(0,2),target=pick('Target',3),safe=pick('Safe',2);
+    function li(a){return a.length?a.map(function(c){return '<li>'+esc(c.u.n)+' ('+esc(CC[c.u.c])+')</li>'}).join(''):'<li class="mut">None in your chosen destinations. Add more.</li>'}
+    var funds=SCH.filter(function(s){return schFit(s).k==='g'&&!s.closed&&(P.fund!=='full'||s.cov==='Full')}).slice(0,4);
+    return '<p style="margin:10px 0 4px"><b>Apply to a balanced set</b></p><p class="mut">Reach</p><ul>'+li(reach)+'</ul><p class="mut" style="margin-top:6px">Target</p><ul>'+li(target)+'</ul><p class="mut" style="margin-top:6px">Safe</p><ul>'+li(safe)+'</ul>'+
+      '<p style="margin:14px 0 4px"><b>Funding to pursue (open now)</b></p><ul>'+(funds.length?funds.map(function(s){return '<li>'+esc(s.n)+' ('+s.cov.toLowerCase()+')</li>'}).join(''):'<li class="mut">No open full-funding match yet. Raise experience or add destinations.</li>')+'</ul>'+
+      '<p style="margin:14px 0 4px"><b>Your biggest levers</b></p><ul>'+(+P.ielts===0?'<li>Take an English test. It unlocks offers.</li>':'')+(!P.res?'<li>Add a research or project line to your profile and statement.</li>':'')+'<li>Get your statement of purpose reviewed before January.</li></ul>';
+  }
+
+  /* ================= ROUTER + EVENTS ================= */
+  function render(keep){
+    var R=route(),r=R.r,h;
+    var V={home:vHome,find:vFind,compare:vCompare,countries:vCountries,scholarships:vSchol,advice:vAdvice,tools:vTools,sop:vSop,help:vHelp,profile:vProfile,wishlist:vWishlist,plan:vPlan,wallet:vWallet};
+    if(r==='prog')h=vProg(R.p);else if(r==='country')h=vCountry(R.p);else if(r==='sch')h=vSchDetail(R.p);else if(r==='art')h=vArt(R.p);
+    else{if(!V[r]){r='home'}h=V[r]()}
+    updNav(r);updTok();updCmp(r);$('view').innerHTML=h;
+    if(r==='sop')wc();
+    if(!keep)window.scrollTo(0,0);
+  }
+  function wc(){var e=$('wc');if(e)e.textContent=(S.sop.trim()?S.sop.trim().split(/\s+/).length:0)+' words'}
+  window.addEventListener('hashchange',function(){closeModal();render()});
+
+  document.addEventListener('click',function(ev){
+    var t=ev.target.closest('[data-act],[data-toast]');if(!t||t.tagName==='INPUT')return;
+    if(t.hasAttribute('data-toast')&&!t.hasAttribute('data-act')){toast(t.getAttribute('data-toast'));return}
+    var a=t.getAttribute('data-act');
+    if(a==='jump'){ev.preventDefault();var el=$(t.getAttribute('data-t'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+    else if(a==='cur'){S.cur=t.getAttribute('data-c');render(true)}
+    else if(a==='ctry'){var c=t.getAttribute('data-c'),i=S.P.ctry.indexOf(c);if(i>-1)S.P.ctry.splice(i,1);else S.P.ctry.push(c);S.F.c=null;render(true)}
+    else if(a==='fcty'){var c2=t.getAttribute('data-c');if(!S.F.c)S.F.c=S.P.ctry.slice();var j=S.F.c.indexOf(c2);if(j>-1)S.F.c.splice(j,1);else S.F.c.push(c2);render(true)}
+    else if(a==='ffit'){S.F.fit=t.getAttribute('data-k');render(true)}
+    else if(a==='freset'){S.F={c:null,q:'',tui:'any',dur:'any',fund:false,fit:'any'};render(true)}
+    else if(a==='fieldgo'){S.P.field=t.getAttribute('data-k');S.F.c=null}
+    else if(a==='adv'){S.adv=advAnswer(t.getAttribute('data-k'));var o=$('advout');if(o)o.innerHTML=S.adv}
+    else if(a==='sc'){S.sc.c=t.getAttribute('data-c');render(true)}
+    else if(a==='st'){S.sc.t=t.getAttribute('data-t');render(true)}
+    else if(a==='sl'){var id=t.getAttribute('data-id');if(!inSl(id))S.sl.push({id:id,st:'Researching'});toast('Saved to your wishlist');render(true)}
+    else if(a==='unsl'){var id2=t.getAttribute('data-id');S.sl=S.sl.filter(function(x){return x.id!==id2});render(true)}
+    else if(a==='cmpadd'){var id3=t.getAttribute('data-id');if(S.cmp.indexOf(id3)<0){if(S.cmp.length>=3){toast('You can compare up to 3 programmes')}else{S.cmp.push(id3);toast('Added to compare')}}render(true)}
+    else if(a==='cmprm'){var id4=t.getAttribute('data-id');S.cmp=S.cmp.filter(function(x){return x!==id4});render(true)}
+    else if(a==='cmpclear'){S.cmp=[];render(true)}
+    else if(a==='report'){
+      if(S.tokens<10){toast('You need 10 tokens. Top up in Wallet.');location.hash='#wallet';return}
+      spend(10,'Application strategy');S.report=buildReport();render(true);toast('10 tokens used')
+    }
+    else if(a==='sopfull'){
+      if(S.tokens<25){toast('You need 25 tokens. Top up in Wallet.');location.hash='#wallet';return}
+      if(S.sop.trim().split(/\s+/).length<30){toast('Paste a longer draft first');return}
+      spend(25,'SOP expert review');S.sopFull=sopDeep();S.reqs.unshift({n:'Statement of purpose review',tg:'General',when:'20 Nov 2026',eta:'Delivered (demo)'});render(true);toast('25 tokens used')
+    }
+    else if(a==='req'){openReq(t.getAttribute('data-id'))}
+    else if(a==='chat'){var R=route();openReq('chat',R.r==='country'?R.p:(R.r==='prog'&&uni(R.p)?uni(R.p).c:''))}
+    else if(a==='reqok'){reqOk(t.getAttribute('data-id'))}
+    else if(a==='close'){closeModal()}
+    else if(a==='buy'){var n=+t.getAttribute('data-t');S.tokens+=n;S.hist.unshift({d:'Top-up: '+n+' tokens',a:n});updTok();$('bal').textContent=S.tokens;$('hist').innerHTML=histH();toast('Simulated: '+n+' tokens added')}
+  });
+  document.addEventListener('change',function(ev){
+    var t=ev.target;
+    if(t.hasAttribute('data-p')){var k=t.getAttribute('data-p');S.P[k]=(k==='res')?t.value==='1':(k==='ielts'||k==='exp'||k==='budget'||k==='age')?+t.value:t.value;toast('Profile updated');if(k==='level'||k==='field'){S.F.c=null}}
+    else if(t.hasAttribute('data-fp')){S.P.field=t.value;render(true)}
+    else if(t.hasAttribute('data-ff')){S.F[t.getAttribute('data-ff')]=t.value;render(true)}
+    else if(t.hasAttribute('data-ffund')){S.F.fund=t.checked;render(true)}
+    else if(t.hasAttribute('data-sfull')){S.sc.full=t.checked;render(true)}
+    else if(t.hasAttribute('data-sopen')){S.sc.open=t.checked;render(true)}
+    else if(t.hasAttribute('data-sort')){S.sort=t.value;render(true)}
+    else if(t.hasAttribute('data-bud')){S.P.budget=+t.value;render(true)}
+    else if(t.hasAttribute('data-cmp')){var id=t.getAttribute('data-cmp'),i=S.cmp.indexOf(id);if(t.checked){if(S.cmp.length>=3){t.checked=false;toast('You can compare up to 3 programmes');return}S.cmp.push(id)}else if(i>-1){S.cmp.splice(i,1)}updCmp(route().r)}
+    else if(t.hasAttribute('data-sl')){var x=S.sl.filter(function(s){return s.id===t.getAttribute('data-sl')})[0];if(x)x.st=t.value}
+    else if(t.hasAttribute('data-doc')){S.docs[DOCS[+t.getAttribute('data-doc')]]=+t.value;var e=$('docp');if(e)e.textContent=Math.round(docProg()*100)+'% ready'}
+    else if(t.hasAttribute('data-tl')){S.tl[+t.getAttribute('data-tl')]=t.checked;render(true)}
+  });
+  document.addEventListener('input',function(ev){
+    var t=ev.target;
+    if(t.id==='sop'){S.sop=t.value;S.sopFull=null;wc();var r=$('sopres');if(r)r.innerHTML=sopFree();var f=$('sopfull');if(f)f.innerHTML=''}
+    else if(t.hasAttribute('data-fq')){S.F.q=t.value;var pos=t.selectionStart;render(true);var n=$('f-q');if(n){n.focus();try{n.setSelectionRange(pos,pos)}catch(e){}}}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+  render();
+})();
+</script>
+</body>
+</html>
